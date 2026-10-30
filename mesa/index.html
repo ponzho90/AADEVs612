@@ -51,6 +51,7 @@ label{display:block;font-size:13px;color:var(--mut);margin:0 0 4px}
 </section>
 <nav id="tabs"></nav>
 <section id="v-toca"></section><section id="v-pr" hidden></section><section id="v-iss" hidden></section>
+<section id="v-mis" hidden></section>
 <section id="v-lab" hidden>
  <div class="card"><h3>Pegar resultados del LAB</h3>
  <p class="mut">Abre el LAB en el celular, termina las pruebas, toca «Copiar informe» y pégalo aquí. Los agentes lo leen en su siguiente turno.</p>
@@ -88,13 +89,14 @@ function seccion(body,re){if(!body)return"";var l=body.split(/\r?\n/),o=[],on=fa
 var RE_NEC=/^\s*(?:#{1,4}\s*)?(?:\*\*)?(?:qu[eé] necesito del ceo|necesito del ceo|te toca)(?:\*\*)?\s*:?\s*(.*)$/i;
 var RE_REC=/^\s*(?:#{1,4}\s*)?(?:\*\*)?(?:recomendaci[oó]n|recomiendo)(?:\*\*)?\s*:?\s*(.*)$/i;
 function analiza(it){var L=it.labels,b=it.body||"",n=seccion(b,RE_NEC),r=seccion(b,RE_REC);
- it.nec=n;it.rec=r;it.toca=false;it.estado="";
+ it.nec=n;it.rec=r;it.toca=false;it.estado="";it.mis=L.indexOf("tarea-ceo")>=0;
  var esAgentes=L.indexOf("reporte-ceo")>=0||L.indexOf("resultados-pruebas")>=0;
  if(it.tipo==="pr"){
   if(it.ci==="fallo"){it.estado="CI falló: los agentes lo corrigen";it.nec=n||"Nada por ahora. Los agentes corrigen la CI.";it.rec=r||"Esperar"}
   else if(it.mergeable===false){it.estado="Con conflicto: los agentes lo resuelven";it.nec=n||"Nada por ahora. Hay conflicto con main.";it.rec=r||"Esperar"}
   else if(it.ci==="curso"){it.estado="CI en curso";it.nec=n||"Esperar a que termine la CI.";it.rec=r||"Esperar"}
   else{it.toca=true;it.estado=it.ci==="ok"?"CI en verde":"Sin CI";it.nec=n||"Revisar y fusionar.";it.rec=r||(it.ci==="ok"?"Fusionar":"Revisar el cambio y fusionar si está bien")}}
+ else if(it.mis){it.toca=true;it.nec=n||"Hacer lo que dice la tarea y avisar cuando esté lista.";it.rec=r||"Hacerla en el orden de la lista"}
  else if(L.indexOf("decision-ceo")>=0){it.toca=true;it.nec=n||"Responder la decisión.";it.rec=r||"Elegir la opción marcada como recomendada en el issue"}
  else if(n){it.toca=true}
  else if(esAgentes){it.nec="Nada: lo atienden los agentes."}
@@ -119,10 +121,26 @@ function repoAct(){return S.proyectos[S.activo]}
 function cuenta(repo,f){var d=D[repo];return d&&d.items?d.items.filter(f).length:0}
 function pintaProj(){var s=$("proj");s.textContent="";S.proyectos.forEach(function(r,i){var o=el("option","",r.split("/")[1]+(D[r]&&D[r].items?" ("+cuenta(r,function(x){return x.toca})+")":""));o.value=i;s.appendChild(o)});s.value=S.activo}
 function pintaTabs(){var n=$("tabs");n.textContent="";var r=repoAct();
- [["toca","Te toca a ti",cuenta(r,function(x){return x.toca})],["pr","PRs",cuenta(r,function(x){return x.tipo==="pr"})],["iss","Issues",cuenta(r,function(x){return x.tipo==="issue"})],["lab","Resultados LAB",null]].forEach(function(t){
+ [["toca","Te toca a ti",cuenta(r,function(x){return x.toca})],["mis","Mis tareas",cuenta(r,function(x){return x.mis})],["pr","PRs",cuenta(r,function(x){return x.tipo==="pr"})],["iss","Issues",cuenta(r,function(x){return x.tipo==="issue"})],["lab","Resultados LAB",null]].forEach(function(t){
   var b=el("button","",t[1]);b.setAttribute("aria-pressed",S.tab===t[0]);if(t[2]!=null)b.appendChild(el("span","badge",String(t[2])));
   b.onclick=function(){S.tab=t[0];guarda();pinta()};n.appendChild(b)});
- ["toca","pr","iss","lab"].forEach(function(k){$("v-"+k).hidden=S.tab!==k})}
+ ["toca","mis","pr","iss","lab"].forEach(function(k){$("v-"+k).hidden=S.tab!==k})}
+var CAMPOS=[["Qué hacer",/qu[eé] hacer|descripci[oó]n/i],["Tomas",/tomas?/i],["Enfoque",/enfoque/i],["Vestuario",/vestuario/i],["Diálogos",/di[aá]logos?|guion|gui[oó]n/i],["Dónde entregarlo",/d[oó]nde (?:entregar|subir)/i],["Fecha límite",/fecha l[ií]mite|para cu[aá]ndo/i]];
+function secciones(body){var out=[],partes=(body||"").split(/^#{2,4}\s+/m);partes.shift();partes.forEach(function(p){var l=p.split(/\r?\n/),t=l.shift().replace(/[*:]/g,"").trim(),c=l.join("\n").trim();
+ for(var i=0;i<CAMPOS.length;i++)if(CAMPOS[i][1].test(t)&&c){out.push([CAMPOS[i][0],c]);break}});return out}
+function tareaCard(repo,it){var c=el("article","card"),h=el("h3"),a=el("a","",it.titulo);a.href=it.url;a.target="_blank";a.rel="noopener";h.appendChild(a);c.appendChild(h);
+ var pl=el("div","fila");pl.appendChild(el("span","pill","Tarea #"+it.n));if(it.autor)pl.appendChild(el("span","pill","pedida por "+it.autor));c.appendChild(pl);
+ var sc=secciones(it.body);if(!sc.length)sc=[["Detalle",it.body||"(sin descripción)"]];
+ sc.forEach(function(x,i){var d=el("details");if(i<2)d.open=true;d.appendChild(el("summary","",x[0]));d.appendChild(el("pre","",x[1].slice(0,4000)));c.appendChild(d)});
+ if(it.rec){var r=el("div","need rec");r.appendChild(el("b","","Recomendación"));r.appendChild(el("span","",it.rec));c.appendChild(r)}
+ var ta=el("textarea");ta.placeholder="Enlace al video o archivo (Drive, YouTube…), o dudas";c.appendChild(ta);
+ var ac=el("div","fila"),ok=el("button","p","Ya lo hice"),du=el("button","s","Tengo dudas / necesito ayuda");
+ ok.onclick=async function(){ok.disabled=true;try{await gh("/repos/"+repo+"/issues/"+it.n+"/comments",{method:"POST",body:{body:"**Tarea hecha (CEO, Mesa de Mando)**\n\n"+(ta.value.trim()||"Sin enlace.")}});await gh("/repos/"+repo+"/issues/"+it.n,{method:"PATCH",body:{state:"closed"}});aviso("Tarea #"+it.n+" marcada como hecha");await cargaRepo(repo);pinta()}catch(e){aviso("No se pudo: "+e.message);ok.disabled=false}};
+ du.onclick=async function(){if(!ta.value.trim())return aviso("Escribe tu duda primero.");try{await gh("/repos/"+repo+"/issues/"+it.n+"/comments",{method:"POST",body:{body:"**Duda del CEO sobre la tarea**\n\n"+ta.value.trim()}});ta.value="";aviso("Duda enviada a los agentes")}catch(e){aviso("No se envió: "+e.message)}};
+ ac.appendChild(ok);ac.appendChild(du);c.appendChild(ac);return c}
+function listaT(cont,repo){cont.textContent="";var d=D[repo];if(!d||d.cargando){cont.appendChild(el("div","vacio","Cargando…"));return}
+ if(d.error){cont.appendChild(el("div","vacio",d.error));return}
+ var a=d.items.filter(function(x){return x.mis});if(!a.length)cont.appendChild(el("div","vacio","Sin tareas para ti en este proyecto. Aquí aparecen videos, registros, cuentas y todo lo que solo tú puedes hacer."));a.forEach(function(i){cont.appendChild(tareaCard(repo,i))})}
 function estadoPill(it){var f=el("div","fila");f.appendChild(el("span","pill",it.tipo==="pr"?"PR #"+it.n:"Issue #"+it.n));
  if(it.estado){var c=el("span","pill "+(it.ci==="ok"?"ok":it.ci==="fallo"||it.mergeable===false?"mal":"am"),it.estado);f.appendChild(c)}
  it.labels.forEach(function(l){f.appendChild(el("span","pill",l))});return f}
@@ -166,6 +184,7 @@ function pintaLab(){var s=$("labDest");s.textContent="";var o=el("option","","Is
  (d&&d.items||[]).filter(function(x){return x.tipo==="pr"}).forEach(function(x){var q=el("option","","Comentario en PR #"+x.n+" · "+x.titulo.slice(0,50));q.value=x.n;s.appendChild(q)})}
 function pinta(){pintaProj();pintaTabs();var r=repoAct();
  lista($("v-toca"),r,function(x){return x.toca},"Nada te toca en este proyecto. Los agentes siguen trabajando.");
+ listaT($("v-mis"),r);
  lista($("v-pr"),r,function(x){return x.tipo==="pr"},"Sin PRs abiertos.");
  lista($("v-iss"),r,function(x){return x.tipo==="issue"},"Sin issues abiertos.");pintaLab();
  var sin=!tok();$("cfg").hidden=!(sin||pinta.cfg);if(sin)aviso("Primero conecta tu token en Ajustes.",6000);pintaProjs()}
