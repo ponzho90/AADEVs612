@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0d0d10"><meta name="robots" content="noindex">
+<title>Mesa de Mando · A&amp;A DEVS</title>
+<style>
+:root{--bg:#0d0d10;--pn:#17171b;--pn2:#202026;--ln:#33333b;--fg:#f2eee8;--mut:#a3a0a8;--rojo:#e21d2b;--rojo2:#ff3b47;--ok:#4fd18b;--am:#f0b04a;--mal:#ff7b72}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;padding-bottom:80px}
+.top{position:sticky;top:0;z-index:5;background:var(--bg);border-top:4px solid var(--rojo);border-bottom:1px solid var(--ln);padding:10px 16px}
+.w{max-width:820px;margin:0 auto;padding:0 16px}.top .w{padding:0;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+h1{font:800 20px Georgia,serif;margin:0;flex:1;min-width:140px}
+select,input,textarea,button{font:inherit;color:var(--fg)}
+select,input[type=text],input[type=password],textarea{background:var(--pn);border:1px solid var(--ln);border-radius:8px;padding:10px;width:100%}
+select{width:auto;max-width:100%}
+textarea{min-height:90px;resize:vertical}
+button{background:var(--pn2);border:1px solid var(--ln);border-radius:8px;min-height:44px;padding:0 14px;cursor:pointer;font-weight:600}
+button.p{background:var(--rojo);border-color:var(--rojo);color:#fff}
+button.s{min-height:34px;font-size:14px;font-weight:500}
+button:disabled{opacity:.5;cursor:default}
+:focus-visible{outline:3px solid var(--rojo2);outline-offset:2px}
+nav{display:flex;gap:6px;overflow-x:auto;padding:12px 0}
+nav button{white-space:nowrap}nav button[aria-pressed=true]{background:var(--rojo);border-color:var(--rojo)}
+.badge{display:inline-block;min-width:20px;padding:0 6px;border-radius:99px;background:var(--bg);margin-left:6px;font-size:13px}
+.card{background:var(--pn);border:1px solid var(--ln);border-radius:10px;padding:14px;margin:0 0 12px;display:flex;flex-direction:column;gap:10px}
+.card h3{margin:0;font-size:17px;line-height:1.25}.card h3 a{color:var(--fg);text-decoration:none}.card h3 a:hover{text-decoration:underline}
+.mut{color:var(--mut);font-size:14px}
+.pill{font-size:12px;border-radius:99px;padding:2px 9px;background:var(--pn2);border:1px solid var(--ln)}
+.pill.ok{color:var(--ok)}.pill.mal{color:var(--mal)}.pill.am{color:var(--am)}
+.fila{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.need{border-left:4px solid var(--rojo);padding:6px 10px;background:var(--bg);border-radius:0 8px 8px 0}
+.need b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--rojo2)}
+.rec b{color:var(--ok)}.need.rec{border-color:var(--ok)}
+pre{white-space:pre-wrap;word-break:break-word;background:var(--bg);padding:10px;border-radius:8px;font:13px/1.4 ui-monospace,monospace;margin:0;max-height:320px;overflow:auto}
+.msg{position:fixed;left:16px;right:16px;bottom:16px;max-width:600px;margin:0 auto;background:var(--pn2);border:1px solid var(--rojo);border-radius:10px;padding:12px 14px;z-index:9}
+.vacio{color:var(--mut);padding:24px 0;text-align:center}
+label{display:block;font-size:13px;color:var(--mut);margin:0 0 4px}
+.sec{margin:18px 0 8px;font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--mut)}
+[hidden]{display:none!important}
+</style></head><body>
+<div class="top"><div class="w"><h1>Mesa de Mando</h1>
+<select id="proj" aria-label="Proyecto"></select><button id="bRec" class="s" title="Recargar">Recargar</button><button id="bCfg" class="s">Ajustes</button></div></div>
+<main class="w">
+<section id="cfg" hidden>
+ <div class="card"><h3>Conectar con GitHub (una sola vez)</h3>
+ <p class="mut">Crea un token en GitHub: Settings → Developer settings → Fine-grained tokens. Elige tus repositorios y da permiso de lectura/escritura a <b>Pull requests</b>, <b>Issues</b>, <b>Actions</b> (lectura) y <b>Contents</b> (lectura). El token se guarda solo en este navegador y solo viaja a api.github.com.</p>
+ <div><label for="tok">Token</label><input id="tok" type="password" autocomplete="off" placeholder="github_pat_…"></div>
+ <div class="fila"><button id="bTok" class="p">Guardar token</button><button id="bOut" class="s">Quitar token</button></div></div>
+ <div class="card"><h3>Proyectos</h3><div id="lisP"></div>
+ <div><label for="nuevo">Agregar proyecto (dueño/repositorio)</label><input id="nuevo" type="text" placeholder="ponzho90/NOMBRE" autocapitalize="off"></div>
+ <button id="bAdd" class="p">Agregar</button></div>
+</section>
+<nav id="tabs"></nav>
+<section id="v-toca"></section><section id="v-pr" hidden></section><section id="v-iss" hidden></section>
+<section id="v-mis" hidden></section>
+<section id="v-lab" hidden>
+ <div class="card"><h3>Pegar resultados del LAB</h3>
+ <p class="mut">Abre el LAB en el celular, termina las pruebas, toca «Copiar informe» y pégalo aquí. Los agentes lo leen en su siguiente turno.</p>
+ <div><label for="labDest">Enviar a</label><select id="labDest" style="width:100%"></select></div>
+ <div><label for="labTxt">Informe</label><textarea id="labTxt" placeholder="Pega aquí el informe del LAB"></textarea></div>
+ <button id="bLab" class="p">Publicar resultados</button></div>
+</section>
+</main>
+<div id="msg" class="msg" hidden role="status"></div>
+<script>
+(function(){
+"use strict";
+var $=function(i){return document.getElementById(i)};
+var K="mesa.v2",T="mesa.token";
+var S={proyectos:["ponzho90/THE-MUSIC-APP","ponzho90/DECONSTRUCT","ponzho90/AADEVs612","ponzho90/CHORDBLOOM"],activo:0,tab:"toca"};
+var D={};            // datos por repo
+function ls(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function lw(k,v){try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(e){}}
+try{var g=JSON.parse(ls(K)||"null");if(g&&g.proyectos&&g.proyectos.length)S=g}catch(e){}
+function guarda(){lw(K,JSON.stringify(S))}
+function tok(){return ls(T)}
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function aviso(t,ms){var m=$("msg");m.textContent=t;m.hidden=false;clearTimeout(aviso.t);aviso.t=setTimeout(function(){m.hidden=true},ms||4000)}
+async function gh(path,o){o=o||{};var h={"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"};
+ if(tok())h.Authorization="Bearer "+tok();if(o.body)h["Content-Type"]="application/json";
+ var r=await fetch("https://api.github.com"+path,{method:o.method||"GET",headers:h,body:o.body?JSON.stringify(o.body):undefined});
+ if(!r.ok){var t="";try{t=(await r.json()).message}catch(e){}var er=new Error(r.status+" "+(t||r.statusText));er.status=r.status;throw er}
+ return r.status===204?null:r.json()}
+/* ---------- análisis de cada elemento ---------- */
+function seccion(body,re){if(!body)return"";var l=body.split(/\r?\n/),o=[],on=false;
+ for(var i=0;i<l.length;i++){var x=l[i];
+  if(!on){var m=x.match(re);if(m){on=true;var r0=(m[1]||"").trim();if(r0)o.push(r0)}continue}
+  if(/^\s*$/.test(x)&&o.length)break;if(/^#{1,4}\s/.test(x)&&o.length)break;o.push(x.replace(/^\s*[-*]\s+/,"").trim())}
+ return o.join(" ").replace(/\*\*/g,"").trim()}
+var RE_NEC=/^\s*(?:#{1,4}\s*)?(?:\*\*)?(?:qu[eé] necesito del ceo|necesito del ceo|te toca)(?:\*\*)?\s*:?\s*(.*)$/i;
+var RE_REC=/^\s*(?:#{1,4}\s*)?(?:\*\*)?(?:recomendaci[oó]n|recomiendo)(?:\*\*)?\s*:?\s*(.*)$/i;
+function analiza(it){var L=it.labels,b=it.body||"",n=seccion(b,RE_NEC),r=seccion(b,RE_REC);
+ it.nec=n;it.rec=r;it.toca=false;it.estado="";it.mis=L.indexOf("tarea-ceo")>=0;
+ var esAgentes=L.indexOf("reporte-ceo")>=0||L.indexOf("resultados-pruebas")>=0;
+ if(it.tipo==="pr"){
+  if(it.ci==="fallo"){it.estado="CI falló: los agentes lo corrigen";it.nec=n||"Nada por ahora. Los agentes corrigen la CI.";it.rec=r||"Esperar"}
+  else if(it.mergeable===false){it.estado="Con conflicto: los agentes lo resuelven";it.nec=n||"Nada por ahora. Hay conflicto con main.";it.rec=r||"Esperar"}
+  else if(it.ci==="curso"){it.estado="CI en curso";it.nec=n||"Esperar a que termine la CI.";it.rec=r||"Esperar"}
+  else{it.toca=true;it.estado=it.ci==="ok"?"CI en verde":"Sin CI";it.nec=n||"Revisar y fusionar.";it.rec=r||(it.ci==="ok"?"Fusionar":"Revisar el cambio y fusionar si está bien")}}
+ else if(it.mis){it.toca=true;it.nec=n||"Hacer lo que dice la tarea y avisar cuando esté lista.";it.rec=r||"Hacerla en el orden de la lista"}
+ else if(L.indexOf("decision-ceo")>=0){it.toca=true;it.nec=n||"Responder la decisión.";it.rec=r||"Elegir la opción marcada como recomendada en el issue"}
+ else if(n){it.toca=true}
+ else if(esAgentes){it.nec="Nada: lo atienden los agentes."}
+ else{it.nec=n||"Nada: lo atienden los agentes."}
+ return it}
+function limpia(t){return (t||"").replace(/\r/g,"").replace(/[#*`>]/g,"").replace(/\s+/g," ").trim()}
+async function cargaRepo(repo){var d={repo:repo,items:[],error:null,cargando:true};D[repo]=d;
+ try{var P=await gh("/repos/"+repo+"/pulls?state=open&per_page=50&sort=updated&direction=desc");
+  var I=await gh("/repos/"+repo+"/issues?state=open&per_page=100");
+  var its=[];
+  await Promise.all(P.map(async function(p){var it={tipo:"pr",n:p.number,titulo:p.title,url:p.html_url,body:p.body||"",labels:p.labels.map(function(l){return l.name}),sha:p.head.sha,ci:"sin",mergeable:null,fecha:p.updated_at,autor:p.user&&p.user.login,draft:p.draft};
+   try{var c=await gh("/repos/"+repo+"/commits/"+p.head.sha+"/check-runs?per_page=50");var cr=c.check_runs||[];
+    if(cr.length){if(cr.some(function(x){return x.status!=="completed"}))it.ci="curso";else if(cr.every(function(x){return["success","neutral","skipped"].indexOf(x.conclusion)>=0}))it.ci="ok";else it.ci="fallo"}}catch(e){}
+   try{var f=await gh("/repos/"+repo+"/pulls/"+p.number);it.mergeable=f.mergeable===false?false:(f.mergeable===true?true:null)}catch(e){}
+   its.push(analiza(it))}));
+  I.forEach(function(i){if(i.pull_request)return;its.push(analiza({tipo:"issue",n:i.number,titulo:i.title,url:i.html_url,body:i.body||"",labels:i.labels.map(function(l){return l.name}),fecha:i.updated_at,autor:i.user&&i.user.login,com:i.comments}))});
+  its.sort(function(a,b){return (b.toca-a.toca)||(new Date(b.fecha)-new Date(a.fecha))});d.items=its}
+ catch(e){d.error=e.message}
+ d.cargando=false}
+/* ---------- vistas ---------- */
+function repoAct(){return S.proyectos[S.activo]}
+function cuenta(repo,f){var d=D[repo];return d&&d.items?d.items.filter(f).length:0}
+function pintaProj(){var s=$("proj");s.textContent="";S.proyectos.forEach(function(r,i){var o=el("option","",r.split("/")[1]+(D[r]&&D[r].items?" ("+cuenta(r,function(x){return x.toca})+")":""));o.value=i;s.appendChild(o)});s.value=S.activo}
+function pintaTabs(){var n=$("tabs");n.textContent="";var r=repoAct();
+ [["toca","Te toca a ti",cuenta(r,function(x){return x.toca})],["mis","Mis tareas",cuenta(r,function(x){return x.mis})],["pr","PRs",cuenta(r,function(x){return x.tipo==="pr"})],["iss","Issues",cuenta(r,function(x){return x.tipo==="issue"})],["lab","Resultados LAB",null]].forEach(function(t){
+  var b=el("button","",t[1]);b.setAttribute("aria-pressed",S.tab===t[0]);if(t[2]!=null)b.appendChild(el("span","badge",String(t[2])));
+  b.onclick=function(){S.tab=t[0];guarda();pinta()};n.appendChild(b)});
+ ["toca","mis","pr","iss","lab"].forEach(function(k){$("v-"+k).hidden=S.tab!==k})}
+var CAMPOS=[["Qué hacer",/qu[eé] hacer|descripci[oó]n/i],["Tomas",/tomas?/i],["Enfoque",/enfoque/i],["Vestuario",/vestuario/i],["Diálogos",/di[aá]logos?|guion|gui[oó]n/i],["Dónde entregarlo",/d[oó]nde (?:entregar|subir)/i],["Fecha límite",/fecha l[ií]mite|para cu[aá]ndo/i]];
+function secciones(body){var out=[],partes=(body||"").split(/^#{2,4}\s+/m);partes.shift();partes.forEach(function(p){var l=p.split(/\r?\n/),t=l.shift().replace(/[*:]/g,"").trim(),c=l.join("\n").trim();
+ for(var i=0;i<CAMPOS.length;i++)if(CAMPOS[i][1].test(t)&&c){out.push([CAMPOS[i][0],c]);break}});return out}
+function tareaCard(repo,it){var c=el("article","card"),h=el("h3"),a=el("a","",it.titulo);a.href=it.url;a.target="_blank";a.rel="noopener";h.appendChild(a);c.appendChild(h);
+ var pl=el("div","fila");pl.appendChild(el("span","pill","Tarea #"+it.n));if(it.autor)pl.appendChild(el("span","pill","pedida por "+it.autor));c.appendChild(pl);
+ var sc=secciones(it.body);if(!sc.length)sc=[["Detalle",it.body||"(sin descripción)"]];
+ sc.forEach(function(x,i){var d=el("details");if(i<2)d.open=true;d.appendChild(el("summary","",x[0]));d.appendChild(el("pre","",x[1].slice(0,4000)));c.appendChild(d)});
+ if(it.rec){var r=el("div","need rec");r.appendChild(el("b","","Recomendación"));r.appendChild(el("span","",it.rec));c.appendChild(r)}
+ var ta=el("textarea");ta.placeholder="Enlace al video o archivo (Drive, YouTube…), o dudas";c.appendChild(ta);
+ var ac=el("div","fila"),ok=el("button","p","Ya lo hice"),du=el("button","s","Tengo dudas / necesito ayuda");
+ ok.onclick=async function(){ok.disabled=true;try{await gh("/repos/"+repo+"/issues/"+it.n+"/comments",{method:"POST",body:{body:"**Tarea hecha (CEO, Mesa de Mando)**\n\n"+(ta.value.trim()||"Sin enlace.")}});await gh("/repos/"+repo+"/issues/"+it.n,{method:"PATCH",body:{state:"closed"}});aviso("Tarea #"+it.n+" marcada como hecha");await cargaRepo(repo);pinta()}catch(e){aviso("No se pudo: "+e.message);ok.disabled=false}};
+ du.onclick=async function(){if(!ta.value.trim())return aviso("Escribe tu duda primero.");try{await gh("/repos/"+repo+"/issues/"+it.n+"/comments",{method:"POST",body:{body:"**Duda del CEO sobre la tarea**\n\n"+ta.value.trim()}});ta.value="";aviso("Duda enviada a los agentes")}catch(e){aviso("No se envió: "+e.message)}};
+ ac.appendChild(ok);ac.appendChild(du);c.appendChild(ac);return c}
+function listaT(cont,repo){cont.textContent="";var d=D[repo];if(!d||d.cargando){cont.appendChild(el("div","vacio","Cargando…"));return}
+ if(d.error){cont.appendChild(el("div","vacio",d.error));return}
+ var a=d.items.filter(function(x){return x.mis});if(!a.length)cont.appendChild(el("div","vacio","Sin tareas para ti en este proyecto. Aquí aparecen videos, registros, cuentas y todo lo que solo tú puedes hacer."));a.forEach(function(i){cont.appendChild(tareaCard(repo,i))})}
+function estadoPill(it){var f=el("div","fila");f.appendChild(el("span","pill",it.tipo==="pr"?"PR #"+it.n:"Issue #"+it.n));
+ if(it.estado){var c=el("span","pill "+(it.ci==="ok"?"ok":it.ci==="fallo"||it.mergeable===false?"mal":"am"),it.estado);f.appendChild(c)}
+ it.labels.forEach(function(l){f.appendChild(el("span","pill",l))});return f}
+function tarjeta(repo,it){var c=el("article","card"),h=el("h3"),a=el("a","",it.titulo);a.href=it.url;a.target="_blank";a.rel="noopener";h.appendChild(a);c.appendChild(h);c.appendChild(estadoPill(it));
+ var n=el("div","need");n.appendChild(el("b","","Qué necesito de ti"));n.appendChild(el("span","",it.nec));c.appendChild(n);
+ var r=el("div","need rec");r.appendChild(el("b","","Recomendación"));r.appendChild(el("span","",it.rec||"Sin recomendación; lee el detalle."));c.appendChild(r);
+ var det=el("details"),sm=el("summary","mut","Ver detalle");det.appendChild(sm);det.appendChild(el("pre","",(it.body||"(sin descripción)").slice(0,6000)));c.appendChild(det);
+ var ta=el("textarea");ta.id="t"+repo.replace(/\W/g,"")+it.n;ta.placeholder="Escribe tu respuesta para los agentes";c.appendChild(ta);
+ var ch=el("div","fila");function chip(txt,val){var b=el("button","s",txt);b.onclick=function(){ta.value=val;ta.focus()};ch.appendChild(b)}
+ if(it.rec&&it.toca)chip("Usar la recomendación","Aprobado: "+it.rec);
+ chip("Aprobado","Aprobado. Continúen.");chip("No, porque…","No. Motivo: ");chip("Dudas","Antes de decidir necesito saber: ");c.appendChild(ch);
+ var ac=el("div","fila"),bs=el("button","p","Enviar comentario");
+ bs.onclick=async function(){if(!ta.value.trim())return aviso("Escribe algo primero.");bs.disabled=true;
+  try{await gh("/repos/"+repo+"/issues/"+it.n+"/comments",{method:"POST",body:{body:"**Respuesta del CEO (Mesa de Mando)**\n\n"+ta.value.trim()}});ta.value="";aviso("Comentario enviado a #"+it.n)}catch(e){aviso("No se envió: "+e.message)}bs.disabled=false};ac.appendChild(bs);
+ if(it.tipo==="pr"){
+  var ab=el("button","s","Pedir / buscar APK");ab.onclick=function(){apk(repo,it,ab)};ac.appendChild(ab);
+  if(it.ci==="ok"&&it.mergeable!==false&&!it.draft){var bm=el("button","s","Fusionar…");var paso=0;
+   bm.onclick=async function(){if(!paso){paso=1;bm.textContent="Confirmar fusión";bm.className="p s";setTimeout(function(){paso=0;bm.textContent="Fusionar…";bm.className="s"},6000);return}
+    bm.disabled=true;try{await gh("/repos/"+repo+"/pulls/"+it.n+"/merge",{method:"POST",body:{merge_method:"merge"}});aviso("PR #"+it.n+" fusionado");await recarga()}catch(e){aviso("No se fusionó: "+e.message);bm.disabled=false}};ac.appendChild(bm)}}
+ c.appendChild(ac);return c}
+async function apk(repo,it,btn){btn.disabled=true;var t0=btn.textContent;
+ try{var R=await gh("/repos/"+repo+"/actions/runs?head_sha="+it.sha+"&per_page=10");var ok=(R.workflow_runs||[]).filter(function(x){return/apk/i.test(x.name+x.path)&&x.status==="completed"&&x.conclusion==="success"})[0];
+  if(!ok){var enc=(R.workflow_runs||[]).filter(function(x){return/apk/i.test(x.name+x.path)&&x.status!=="completed"})[0];
+   if(enc){aviso("El APK se está compilando. Vuelve a tocar en unos minutos.");}
+   else if(it.labels.indexOf("compilar-apk")<0){await gh("/repos/"+repo+"/issues/"+it.n+"/labels",{method:"POST",body:{labels:["compilar-apk"]}});aviso("Pedí la compilación (etiqueta compilar-apk). Toca de nuevo en ~10 minutos.")}
+   else aviso("No hay APK exitoso todavía. Revisa la CI del PR.");btn.disabled=false;return}
+  var A=await gh("/repos/"+repo+"/actions/runs/"+ok.id+"/artifacts");var art=(A.artifacts||[])[0];
+  if(!art){aviso("La compilación no dejó archivo.");btn.disabled=false;return}
+  aviso("Bajando el APK…",8000);
+  try{var r=await fetch("https://api.github.com/repos/"+repo+"/actions/artifacts/"+art.id+"/zip",{headers:{Authorization:"Bearer "+tok(),Accept:"application/vnd.github+json"}});
+   if(!r.ok)throw new Error(r.status);var bl=await r.blob();var u=URL.createObjectURL(bl),a=document.createElement("a");a.href=u;a.download=art.name+".zip";document.body.appendChild(a);a.click();a.remove();
+   aviso("Descargado "+art.name+".zip. Ábrelo desde Archivos, extrae el .apk e instálalo.",9000)}
+  catch(e){window.open(ok.html_url,"_blank");aviso("Abrí la página de la compilación: baja el archivo en Artifacts.",8000)}
+ }catch(e){aviso("APK: "+e.message)}
+ btn.disabled=false;btn.textContent=t0}
+function lista(cont,repo,f,vacio){cont.textContent="";var d=D[repo];
+ if(!d||d.cargando){cont.appendChild(el("div","vacio","Cargando…"));return}
+ if(d.error){var e=el("div","card");e.appendChild(el("b","","No pude leer "+repo));e.appendChild(el("span","mut",d.error+(/401|403|404/.test(d.error)?". Revisa el token y sus permisos en Ajustes.":"")));cont.appendChild(e);return}
+ var a=d.items.filter(f);if(!a.length)cont.appendChild(el("div","vacio",vacio));a.forEach(function(i){cont.appendChild(tarjeta(repo,i))})}
+function pintaLab(){var s=$("labDest");s.textContent="";var o=el("option","","Issue nuevo «resultados-pruebas»");o.value="nuevo";s.appendChild(o);var d=D[repoAct()];
+ (d&&d.items||[]).filter(function(x){return x.tipo==="pr"}).forEach(function(x){var q=el("option","","Comentario en PR #"+x.n+" · "+x.titulo.slice(0,50));q.value=x.n;s.appendChild(q)})}
+function pinta(){pintaProj();pintaTabs();var r=repoAct();
+ lista($("v-toca"),r,function(x){return x.toca},"Nada te toca en este proyecto. Los agentes siguen trabajando.");
+ listaT($("v-mis"),r);
+ lista($("v-pr"),r,function(x){return x.tipo==="pr"},"Sin PRs abiertos.");
+ lista($("v-iss"),r,function(x){return x.tipo==="issue"},"Sin issues abiertos.");pintaLab();
+ var sin=!tok();$("cfg").hidden=!(sin||pinta.cfg);if(sin)aviso("Primero conecta tu token en Ajustes.",6000);pintaProjs()}
+function pintaProjs(){var c=$("lisP");c.textContent="";S.proyectos.forEach(function(r,i){var f=el("div","fila");f.style.marginBottom="8px";var t=el("span","",r);t.style.flex="1";f.appendChild(t);
+ var b=el("button","s","Abrir");b.onclick=function(){S.activo=i;guarda();pinta.cfg=false;pinta()};f.appendChild(b);
+ var q=el("button","s","Quitar");q.onclick=function(){if(S.proyectos.length<2)return aviso("Debe quedar al menos un proyecto.");S.proyectos.splice(i,1);if(S.activo>=S.proyectos.length)S.activo=0;guarda();pinta()};f.appendChild(q);c.appendChild(f)})}
+async function recarga(){S.proyectos.forEach(function(r){D[r]={cargando:true,items:[]}});pinta();
+ if(!tok())return;await Promise.all(S.proyectos.map(cargaRepo));pinta()}
+/* ---------- eventos ---------- */
+$("proj").onchange=function(e){S.activo=+e.target.value;guarda();pinta()};
+$("bRec").onclick=recarga;
+$("bCfg").onclick=function(){pinta.cfg=!pinta.cfg;$("cfg").hidden=!pinta.cfg&&!!tok()};
+$("bTok").onclick=function(){var v=$("tok").value.trim();if(!v)return;lw(T,v);$("tok").value="";aviso("Token guardado.");pinta.cfg=false;recarga()};
+$("bOut").onclick=function(){lw(T,null);aviso("Token quitado de este navegador.");pinta()};
+$("bAdd").onclick=async function(){var v=$("nuevo").value.trim().replace(/^https?:\/\/github\.com\//,"").replace(/\/$/,"");if(!/^[\w.-]+\/[\w.-]+$/.test(v))return aviso("Escribe dueño/repositorio, por ejemplo ponzho90/MIAPP.");
+ if(S.proyectos.indexOf(v)>=0)return aviso("Ya está agregado.");
+ try{var r=await gh("/repos/"+v);v=r.full_name;S.proyectos.push(v);S.activo=S.proyectos.length-1;guarda();$("nuevo").value="";pinta.cfg=false;await cargaRepo(v);pinta()}catch(e){aviso("No encontré ese repositorio con tu token: "+e.message)}};
+$("bLab").onclick=async function(){var txt=$("labTxt").value.trim();if(!txt)return aviso("Pega el informe primero.");var b=$("bLab");b.disabled=true;var repo=repoAct(),dest=$("labDest").value;
+ try{if(dest==="nuevo"){var i=await gh("/repos/"+repo+"/issues",{method:"POST",body:{title:"Resultados de pruebas en celular "+new Date().toISOString().slice(0,16).replace("T"," "),body:txt,labels:["resultados-pruebas"]}});aviso("Issue #"+i.number+" creado para los agentes.")}
+  else{await gh("/repos/"+repo+"/issues/"+dest+"/comments",{method:"POST",body:{body:"## Resultados LAB\n\n"+txt}});aviso("Resultados publicados en el PR #"+dest+".")}
+  $("labTxt").value=""}catch(e){aviso("No se publicó: "+e.message)}b.disabled=false};
+pinta.cfg=false;recarga();
+})();
+</script></body></html>
