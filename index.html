@@ -1,45 +1,105 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>A&amp;A DEVS · THE MUSIC APP y Deconstruct</title>
-<meta name="description" content="Apps para guitarristas: THE MUSIC APP (afinador, pedalera, looper y más) y Deconstruct (separa canciones en instrumentos, sin conexión).">
+<meta name="description" content="Apps para guitarristas: THE MUSIC APP (afinador, pedalera, looper y más) y Deconstruct (separa canciones en instrumentos, sin conexión). Gratis con plan Pro opcional. Prueba cerrada abierta.">
+<meta name="theme-color" content="#171009">
 <style>
-:root{--bg:#14110f;--fg:#f2ece4;--mut:#a89f94;--ac:#e8a33d;--pn:#201b17;--ln:#3a322b}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.55 Georgia,"Times New Roman",serif}
-.w{max-width:880px;margin:0 auto;padding:0 20px}
-header{padding:56px 0 32px;border-bottom:1px solid var(--ln)}
-h1{font:800 clamp(2rem,6vw,3.4rem)/1.05 "Arial Narrow",Arial,sans-serif;margin:0 0 12px;letter-spacing:.01em}
-h2{font:700 1.5rem/1.2 "Arial Narrow",Arial,sans-serif;margin:0 0 8px;color:var(--ac)}
-p{margin:0 0 12px}.m{color:var(--mut)}
-section{padding:36px 0;border-bottom:1px solid var(--ln)}
-.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
-.c{background:var(--pn);border:1px solid var(--ln);border-radius:8px;padding:18px}
-ul{margin:0;padding-left:20px}
-.b{display:inline-block;padding:10px 18px;border-radius:8px;background:var(--ac);color:#1a1209;font:700 16px Arial,sans-serif;text-decoration:none}
-.b[aria-disabled=true]{background:var(--ln);color:var(--mut)}
-a{color:var(--ac)}footer{padding:28px 0 48px;color:var(--mut);font-size:14px}
+:root{color-scheme:dark;
+--fondo:#171009;--madera:#3c2a1b;--tarjeta:#1f160d;--sup:#2a2016;--hundido:#0d0903;--borde:#5b4733;--bsuave:#3b2f1c;
+--texto:#f3e9d6;--texto2:#b9a98f;--ac:#ffb42a;--acc:#ffd98a;--aco:#e69a2e;--sobre:#2a2218;--ok:#4cff8a;
+--f:system-ui,Roboto,"Segoe UI",sans-serif;--mono:ui-monospace,"Roboto Mono","Droid Sans Mono",Menlo,Consolas,monospace}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--texto);font:16px/1.55 var(--f);
+background:var(--fondo) repeating-linear-gradient(90deg,rgba(60,42,27,.35) 0 118px,rgba(0,0,0,.18) 118px 120px)}
+.w{max-width:960px;margin:0 auto;padding:0 16px}
+a{color:var(--ac)}
+a:focus-visible,.b:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.salto{position:absolute;left:-999px;top:8px;background:var(--ac);color:var(--sobre);padding:8px 12px;border-radius:6px;font-weight:700}
+.salto:focus{left:8px;z-index:9}
+nav.top{background:rgba(13,9,3,.92);border-bottom:1px solid var(--borde);position:sticky;top:0;z-index:5}
+nav.top .w{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center;padding-top:8px;padding-bottom:8px}
+nav.top strong{font-weight:900;letter-spacing:.06em;margin-right:auto}
+nav.top a{color:var(--texto);text-decoration:none;padding:6px 2px;font-size:14px}
+nav.top a:hover{color:var(--ac);text-decoration:underline}
+header.hero{padding:48px 0 36px}
+.lcd{display:inline-block;font:700 13px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ac);
+background:linear-gradient(var(--hundido),#221807);border:1px solid var(--borde);border-radius:6px;padding:6px 10px;margin:0 0 16px}
+h1{font:900 clamp(2rem,8vw,3.6rem)/1.05 var(--f);margin:0 0 14px;letter-spacing:-.01em}
+h2{font:900 clamp(1.4rem,5vw,1.9rem)/1.15 var(--f);margin:0 0 8px;color:var(--ac)}
+h3{font:800 1.05rem/1.25 var(--f);margin:0 0 6px}
+p{margin:0 0 12px}.m{color:var(--texto2)}
+.lead{font-size:1.1rem;max-width:40em}
+section{padding:36px 0;border-top:1px solid var(--bsuave)}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px;margin-top:14px}
+.c{background:var(--tarjeta);border:1px solid var(--borde);border-radius:12px;padding:16px;box-shadow:0 3px 0 #0a0a0c}
+.c p{margin:0}
+.pro{border-color:var(--ac)}
+.etq{display:inline-block;font:700 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;background:var(--ac);color:var(--sobre);border-radius:4px;padding:2px 8px;margin-bottom:8px}
+.precio{font:700 15px var(--mono);color:var(--acc);margin:0 0 10px}
+ul.ok{list-style:none;margin:0 0 12px;padding:0}
+ul.ok li{padding:4px 0 4px 26px;position:relative}
+ul.ok li::before{content:"\2713";position:absolute;left:0;color:var(--ok);font-weight:900}
+ol.pasos{margin:0 0 14px;padding-left:22px}ol.pasos li{margin-bottom:8px}
+.b{display:inline-block;padding:12px 20px;border-radius:10px;background:linear-gradient(var(--acc),var(--aco));color:var(--sobre);font:800 16px var(--f);text-decoration:none;min-height:44px}
+.b:hover{filter:brightness(1.08)}
+.nota{background:var(--sup);border:1px solid var(--borde);border-radius:10px;padding:12px 14px}
+footer{padding:28px 0 48px;color:var(--texto2);font-size:14px;border-top:1px solid var(--bsuave)}
+footer a{margin-right:14px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style></head><body>
-<header><div class="w"><h1>Herramientas para guitarristas</h1>
+<a class="salto" href="#contenido">Saltar al contenido</a>
+<nav class="top" aria-label="Principal"><div class="w"><strong>A&amp;A DEVS</strong>
+<a href="#apps">Apps</a><a href="#planes">Planes</a><a href="#prueba">Prueba cerrada</a><a href="privacidad.html">Privacidad</a></div></nav>
+<header class="hero"><div class="w">
+<p class="lcd">Prueba cerrada abierta</p>
+<h1>Herramientas para guitarristas</h1>
 <p class="m">A&amp;A DEVS · La Paz, Baja California Sur, México</p>
-<p>Afina, arma tu cadena de efectos, graba y separa canciones en instrumentos. Todo pensado para tocar en vivo con baja latencia.</p>
-<p class="m">Estamos en <strong>prueba cerrada</strong> en Google Play. ¿Quieres probar la app antes de su lanzamiento? Escríbenos con tu correo de Google Play.</p></div></header>
-<main class="w">
-<section><h2>THE MUSIC APP</h2>
+<p class="lead">Afina, arma tu cadena de efectos, graba y separa canciones en instrumentos. Todo pensado para tocar en vivo con baja latencia. Gratis para empezar, con un plan Pro opcional.</p>
+<p><a class="b" href="#prueba">Quiero probar la app</a></p>
+</div></header>
+<main id="contenido" class="w">
+<section id="apps"><h2>THE MUSIC APP</h2>
 <p>App Android con seis módulos para el guitarrista. Funciona con el micrófono del teléfono o con una interfaz de audio.</p>
 <div class="g">
-<div class="c"><strong>Calibratuner</strong><p class="m">Afinador y calibración de tu guitarra.</p></div>
-<div class="c"><strong>Chain</strong><p class="m">Cadena de pedales y amplificadores con baja latencia.</p></div>
-<div class="c"><strong>DAWPER</strong><p class="m">Graba por canales y arma tus ideas.</p></div>
-<div class="c"><strong>TunTunPss</strong><p class="m">Crea beats y mándalos a DAWPER.</p></div>
-<div class="c"><strong>FSesh</strong><p class="m">Escalas y grados sobre el mástil.</p></div>
-<div class="c"><strong>Diary</strong><p class="m">Bitácora de tus sesiones de práctica.</p></div></div>
-<p style="margin-top:16px"><a class="b" aria-disabled="true">Descarga del APK: próximamente</a></p></section>
+<div class="c"><h3>Calibratuner</h3><p class="m">Afinador y calibración de tu guitarra.</p></div>
+<div class="c"><h3>Chain</h3><p class="m">Cadena de pedales y amplificadores con baja latencia.</p></div>
+<div class="c"><h3>DAWPER</h3><p class="m">Graba por canales y arma tus ideas.</p></div>
+<div class="c"><h3>TunTunPss</h3><p class="m">Crea beats y mándalos a DAWPER.</p></div>
+<div class="c"><h3>FSesh</h3><p class="m">Escalas y grados sobre el mástil.</p></div>
+<div class="c"><h3>Diary</h3><p class="m">Bitácora de tus sesiones de práctica.</p></div></div>
+<p class="m" style="margin-top:14px">Por ahora la app solo se consigue en la prueba cerrada. Todavía no hay descarga pública.</p></section>
+
 <section><h2>Deconstruct</h2>
 <p>Separa una canción en voz, batería, bajo, guitarra, piano y otros. Se procesa en tu teléfono, sin conexión a internet y sin subir tus archivos.</p>
-<p class="m">Disponible primero en prueba cerrada.</p></section>
+<p class="m">Disponible primero en la prueba cerrada.</p></section>
+
 <section><h2>Enciclopedia de escalas para guitarra</h2>
-<p>Libro en español con diagramas de 31 escalas en las 12 raíces. Formato PDF.</p>
+<p>Libro en español con diagramas de 31 escalas en las 12 raíces. Formato PDF. Estará incluido en el plan Pro.</p>
 <p class="m">Próximamente.</p></section>
-<section><h2>Privacidad</h2><p>Lee cómo tratamos tus datos en la <a href="privacidad.html">política de privacidad</a>.</p></section>
+
+<section id="planes"><h2>Planes</h2>
+<p>Un solo paquete cubre THE MUSIC APP, Deconstruct y el libro. Sin anuncios de banner mientras tocas.</p>
+<div class="g">
+<div class="c"><span class="etq">Gratis</span><h3>Para empezar</h3>
+<ul class="ok"><li>Afinador</li><li>Lo básico de Chain</li><li>5 beats gratis en TunTunPss</li><li>2 canales en DAWPER</li><li>Diary con resumen limitado</li></ul>
+<p class="precio">Sin costo</p></div>
+<div class="c pro"><span class="etq">Pro</span><h3>Todo sin tope</h3>
+<ul class="ok"><li>Canales y exportación sin tope en DAWPER</li><li>Modelos de amplificador y presets completos</li><li>Diary con todos tus momentos</li><li>Deconstruct sin límite</li><li>El libro de escalas en PDF incluido</li></ul>
+<p class="precio">Mensual, anual o de por vida · precios por anunciar</p>
+<p class="m">Prueba Pro gratis por 14 días la primera vez que toques algo de Pro.</p></div></div>
+<p class="m" style="margin-top:14px">Los precios todavía no están definidos y por ahora no se cobra nada. Lo que incluye cada plan puede ajustarse antes del lanzamiento.</p></section>
+
+<section id="prueba"><h2>Prueba cerrada: pide tu acceso</h2>
+<p>Buscamos guitarristas que quieran probar la app y decirnos qué mejorar. Para darte acceso en Google Play necesitamos el correo de tu cuenta de Google Play.</p>
+<ol class="pasos">
+<li>Escríbenos desde el correo que usas en Google Play.</li>
+<li>Cuéntanos el modelo de tu teléfono Android y si tocas con micrófono o con interfaz de audio.</li>
+<li>Te agregamos a la lista de probadores y te mandamos el enlace para instalar.</li></ol>
+<div class="nota"><p><strong>Contacto:</strong> el correo para pedir acceso se publicará en esta página. Mientras tanto, la política de privacidad también lo mostrará cuando esté definido.</p>
+<p class="m" style="margin:0">Usaremos tu correo solo para darte acceso a la prueba.</p></div></section>
+
+<section id="privacidad"><h2>Privacidad</h2><p>Lee cómo tratamos tus datos en la <a href="privacidad.html">política de privacidad</a>.</p></section>
 </main>
-<footer><div class="w">© 2026 A&amp;A DEVS · aadevs612.com</div></footer>
+<footer><div class="w"><a href="privacidad.html">Política de privacidad</a><span>© 2026 A&amp;A DEVS · aadevs612.com</span></div></footer>
 </body></html>
