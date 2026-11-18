@@ -15,12 +15,12 @@ background:var(--fondo) repeating-linear-gradient(90deg,rgba(60,42,27,.35) 0 118
 .w{max-width:960px;margin:0 auto;padding:0 16px}
 a{color:var(--ac)}
 a:focus-visible,.b:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
-.salto{position:absolute;left:-999px;top:8px;background:var(--ac);color:var(--sobre);padding:8px 12px;border-radius:6px;font-weight:700}
+.salto{position:absolute;left:-999px;top:8px;background:var(--ac);color:var(--sobre);padding:12px;min-height:44px;border-radius:6px;font-weight:700}
 .salto:focus{left:8px;z-index:9}
 nav.top{background:rgba(13,9,3,.92);border-bottom:1px solid var(--borde);position:sticky;top:0;z-index:5}
 nav.top .w{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center;padding-top:8px;padding-bottom:8px}
 nav.top strong{font-weight:900;letter-spacing:.06em;margin-right:auto}
-nav.top a{color:var(--texto);text-decoration:none;padding:6px 2px;font-size:14px}
+nav.top a{color:var(--texto);text-decoration:none;padding:0 4px;font-size:14px;display:inline-flex;align-items:center;min-height:44px}
 nav.top a:hover{color:var(--ac);text-decoration:underline}
 header.hero{padding:48px 0 36px}
 .lcd{display:inline-block;font:700 13px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ac);
@@ -45,7 +45,10 @@ ol.pasos{margin:0 0 14px;padding-left:22px}ol.pasos li{margin-bottom:8px}
 .b:hover{filter:brightness(1.08)}
 .nota{background:var(--sup);border:1px solid var(--borde);border-radius:10px;padding:12px 14px}
 footer{padding:28px 0 48px;color:var(--texto2);font-size:14px;border-top:1px solid var(--bsuave)}
-footer a{margin-right:14px}
+footer .w{display:flex;flex-wrap:wrap;gap:0 18px;align-items:center}
+footer a{display:inline-flex;align-items:center;min-height:44px;overflow-wrap:anywhere}
+footer span{flex-basis:100%}
+.nota a{display:inline-block;padding:12px 0;overflow-wrap:anywhere}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style></head><body>
 <a class="salto" href="#contenido">Saltar al contenido</a>
@@ -82,12 +85,12 @@ footer a{margin-right:14px}
 <p>Un solo paquete cubre THE MUSIC APP, Deconstruct y el libro. Sin anuncios de banner mientras tocas.</p>
 <div class="g">
 <div class="c"><span class="etq">Gratis</span><h3>Para empezar</h3>
-<ul class="ok"><li>Afinador</li><li>Lo básico de Chain</li><li>5 beats gratis en TunTunPss</li><li>2 canales en DAWPER</li><li>Diary con resumen limitado</li></ul>
+<ul class="ok"><li>Calibratuner (afinador), Diary y FSesh con las 5 escalas de siempre</li><li>Chain: 1 pedal de cada tipo y 5 tonos, sin modelos NAM</li><li>TunTunPss: 5 beats pregrabados de hasta 30 s</li><li>DAWPER: 2 canales, loops de hasta 30 s</li></ul>
 <p class="precio">Sin costo</p></div>
 <div class="c pro"><span class="etq">Pro</span><h3>Todo sin tope</h3>
-<ul class="ok"><li>Canales y exportación sin tope en DAWPER</li><li>Modelos de amplificador y presets completos</li><li>Diary con todos tus momentos</li><li>Deconstruct sin límite</li><li>El libro de escalas en PDF incluido</li></ul>
-<p class="precio">Mensual, anual o de por vida · precios por anunciar</p>
-<p class="m">Prueba Pro gratis por 14 días la primera vez que toques algo de Pro.</p></div></div>
+<ul class="ok"><li>Chain completo con modelos NAM</li><li>DAWPER y TunTunPss sin límites, con exportación</li><li>Diary que graba por ti</li><li>El libro de escalas completo</li></ul>
+<p class="precio">Precios por anunciar</p>
+<p class="m">Prueba Pro gratis por 14 días la primera vez que toques algo de Pro. Si vence, lo que guardaste se conserva en solo lectura.</p></div></div>
 <p class="m" style="margin-top:14px">Los precios todavía no están definidos y por ahora no se cobra nada. Lo que incluye cada plan puede ajustarse antes del lanzamiento.</p></section>
 
 <section id="prueba"><h2>Prueba cerrada: pide tu acceso</h2>
@@ -101,5 +104,5 @@ footer a{margin-right:14px}
 
 <section id="privacidad"><h2>Privacidad</h2><p>Lee cómo tratamos tus datos en la <a href="privacidad.html">política de privacidad</a>.</p></section>
 </main>
-<footer><div class="w"><a href="privacidad.html">Política de privacidad</a><span>© 2026 A&amp;A DEVS · aadevs612.com</span></div></footer>
+<footer><div class="w"><a href="mailto:contacto@aadevs612.com">contacto@aadevs612.com</a><a href="privacidad.html">Política de privacidad</a><span>© 2026 A&amp;A DEVS · aadevs612.com</span></div></footer>
 </body></html>
