@@ -25,6 +25,7 @@ nav.top .w{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;padding-t
 nav.top strong{font:900 15px var(--ft);letter-spacing:.06em;margin-right:auto}
 nav.top a{color:var(--texto);text-decoration:none;padding:0 4px;font-size:14px;display:inline-flex;align-items:center;min-height:44px}
 nav.top a:hover{color:var(--ac)}
+@media (max-width:480px){nav.top .w{gap:0 6px}nav.top strong{font-size:13px}nav.top a{font-size:13px;padding:0 3px}nav.top .nvp{display:none}nav.top a[href="#apps"]{display:none}}
 h1{font:900 clamp(2rem,7.4vw,3.5rem)/1.05 var(--ft);margin:0 0 14px}
 h2{font:900 clamp(1.5rem,5vw,2.2rem)/1.1 var(--ft);margin:0 0 8px;color:var(--ac);text-shadow:0 2px 0 #000}
 h3{font:800 1.05rem/1.25 var(--ch);font-style:italic;margin:0 0 6px}
@@ -164,7 +165,7 @@ html{scroll-behavior:auto}
 </style></head><body>
 <a class="salto" href="#contenido">Saltar al contenido</a>
 <nav class="top" aria-label="Principal"><div class="w"><strong>A&amp;A DEVS</strong>
-<a href="#apps">Apps</a><a href="#deconstruct">Deconstruct</a><a href="#planes">Planes</a><a href="#prueba">Prueba cerrada</a><a href="privacidad.html">Privacidad</a></div></nav>
+<a href="#apps">Apps</a><a href="#deconstruct">Deconstruct</a><a href="#planes">Planes</a><a href="#prueba">Prueba cerrada</a><a class="nvp" href="privacidad.html">Privacidad</a></div></nav>
 
 <header class="hero esc madera"><div class="w"><div>
 <p class="lcd">Prueba cerrada abierta</p>
