@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>A&amp;A DEVS · THE MUSIC APP y Deconstruct</title>
 <meta name="description" content="Apps para guitarristas: THE MUSIC APP (afinador, pedalera, looper y más) y Deconstruct (separa canciones en instrumentos, sin conexión). Gratis con plan Pro opcional. Prueba cerrada abierta.">
 <meta name="theme-color" content="#171009">
@@ -9,10 +9,14 @@
 --texto:#f3e9d6;--texto2:#b9a98f;--ac:#ffb42a;--acc:#ffd98a;--aco:#e69a2e;--sobre:#2a2218;--ok:#4cff8a;
 --f:system-ui,Roboto,"Segoe UI",sans-serif;--mono:ui-monospace,"Roboto Mono","Droid Sans Mono",Menlo,Consolas,monospace}
 *{box-sizing:border-box}
+a,.b{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+h1,h2,h3{text-wrap:balance;overflow-wrap:anywhere}
+p,li{text-wrap:pretty;overflow-wrap:break-word}
+body{-webkit-text-size-adjust:100%}
 html{scroll-behavior:smooth}
 body{margin:0;color:var(--texto);font:16px/1.55 var(--f);
 background:var(--fondo) repeating-linear-gradient(90deg,rgba(60,42,27,.35) 0 118px,rgba(0,0,0,.18) 118px 120px)}
-.w{max-width:960px;margin:0 auto;padding:0 16px}
+.w{max-width:960px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left)) 0 max(16px,env(safe-area-inset-right))}
 a{color:var(--ac)}
 a:focus-visible,.b:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
 .salto{position:absolute;left:-999px;top:8px;background:var(--ac);color:var(--sobre);padding:12px;min-height:44px;border-radius:6px;font-weight:700}
@@ -44,10 +48,10 @@ ul.ok li{padding:4px 0 4px 26px;position:relative}
 ul.ok li::before{content:"\2713";position:absolute;left:0;color:var(--ok);font-weight:900}
 ol.pasos{margin:0 0 14px;padding-left:22px}ol.pasos li{margin-bottom:8px}
 .b{display:inline-block;padding:12px 20px;border-radius:10px;background:linear-gradient(var(--acc),var(--aco));color:var(--sobre);font:800 16px var(--f);text-decoration:none;min-height:44px}
-.b:hover{filter:brightness(1.08)}
 ul.pr{list-style:none;margin:0 0 10px;padding:0}
 ul.pr li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--bsuave)}
-ul.pr b{font:700 15px var(--mono);color:var(--acc);white-space:nowrap}
+ul.pr span{min-width:0}
+ul.pr b{font-variant-numeric:tabular-nums;font:700 15px var(--mono);color:var(--acc);white-space:nowrap}
 .nota{background:var(--sup);border:1px solid var(--borde);border-radius:10px;padding:12px 14px}
 footer{padding:28px 0 48px;color:var(--texto2);font-size:14px;border-top:1px solid var(--bsuave)}
 footer .w{display:flex;flex-wrap:wrap;gap:0 18px;align-items:center}
@@ -55,7 +59,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;overflow-wrap:an
 footer span{flex-basis:100%}
 .nota a{display:inline-block;padding:12px 0;overflow-wrap:anywhere}
 .c{transition:transform .18s ease-out,border-color .18s}
-.c:hover{transform:translateY(-2px);border-color:var(--aco)}
+@media (hover:hover) and (pointer:fine){.c:hover{transform:translateY(-2px);border-color:var(--aco)}.b:hover{filter:brightness(1.08)}}
 .b{transition:filter .15s,transform .1s}
 .b:active{transform:translateY(2px) scale(.98);filter:brightness(.95)}
 .nota a,footer a,.pasos a,section p a{text-decoration-thickness:1px;text-underline-offset:3px;transition:text-decoration-thickness .15s}
@@ -75,6 +79,7 @@ footer span{flex-basis:100%}
 .hero .w>div>*,.hero .afin{animation:ent .7s cubic-bezier(.2,.7,.2,1) both}
 .hero .w>div>:nth-child(2){animation-delay:.08s}.hero .w>div>:nth-child(3){animation-delay:.16s}.hero .w>div>:nth-child(4){animation-delay:.24s}.hero .w>div>:nth-child(5){animation-delay:.32s}.hero .afin{animation-delay:.3s}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hero .w>div>*,.hero .afin{animation:none}.c,.b{transition:none}.c:hover{transform:none}}
+@media (prefers-contrast:more){:root{--borde:#8a7357;--texto2:#d6c8ad}}
 </style></head><body>
 <a class="salto" href="#contenido">Saltar al contenido</a>
 <nav class="top" aria-label="Principal"><div class="w"><strong>A&amp;A DEVS</strong>
