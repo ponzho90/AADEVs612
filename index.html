@@ -22,7 +22,8 @@ nav.top .w{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center;padding-t
 nav.top strong{font-weight:900;letter-spacing:.06em;margin-right:auto}
 nav.top a{color:var(--texto);text-decoration:none;padding:0 4px;font-size:14px;display:inline-flex;align-items:center;min-height:44px}
 nav.top a:hover{color:var(--ac);text-decoration:underline}
-header.hero{padding:48px 0 36px}
+header.hero{padding:48px 0 36px;min-height:calc(100svh - 61px);display:flex;align-items:center}
+header.hero>.w{width:100%}
 .lcd{display:inline-block;font:700 13px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ac);
 background:linear-gradient(var(--hundido),#221807);border:1px solid var(--borde);border-radius:6px;padding:6px 10px;margin:0 0 16px}
 h1{font:900 clamp(2rem,8vw,3.6rem)/1.05 var(--f);margin:0 0 14px;letter-spacing:-.01em}
@@ -53,17 +54,41 @@ footer .w{display:flex;flex-wrap:wrap;gap:0 18px;align-items:center}
 footer a{display:inline-flex;align-items:center;min-height:44px;overflow-wrap:anywhere}
 footer span{flex-basis:100%}
 .nota a{display:inline-block;padding:12px 0;overflow-wrap:anywhere}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.c{transition:transform .18s ease-out,border-color .18s}
+.c:hover{transform:translateY(-2px);border-color:var(--aco)}
+.b{transition:filter .15s,transform .1s}
+.b:active{transform:translateY(2px) scale(.98);filter:brightness(.95)}
+.nota a,footer a,.pasos a,section p a{text-decoration-thickness:1px;text-underline-offset:3px;transition:text-decoration-thickness .15s}
+.nota a:hover,footer a:hover,section p a:hover{text-decoration-thickness:3px}
+.hero .w{display:grid;grid-template-columns:1fr;gap:28px;align-items:center}
+@media (min-width:800px){.hero .w{grid-template-columns:1.3fr 1fr}}
+.afin{background:linear-gradient(var(--hundido),#221807);border:1px solid var(--borde);border-radius:14px;padding:20px;box-shadow:0 3px 0 #0a0a0c;font-family:var(--mono);text-align:center}
+.afin .nm{font:700 4.5rem/1 Georgia,serif;color:var(--ac);margin:0}
+.afin .hz{color:var(--texto2);font-size:14px;margin:6px 0 14px}
+.afin .esc{display:flex;justify-content:center;gap:6px;align-items:flex-end;height:34px;margin-bottom:10px}
+.afin .esc i{width:6px;background:var(--borde);border-radius:2px;height:14px}
+.afin .esc i:nth-child(n+4):nth-child(-n+8){height:22px}
+.afin .esc i.c0{background:var(--ok);height:34px}
+.afin .cuerdas{display:flex;justify-content:space-between;color:var(--texto2);font-size:13px;border-top:1px solid var(--bsuave);padding-top:10px}
+.afin .cuerdas b{color:var(--acc)}
+@keyframes ent{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.hero .w>div>*,.hero .afin{animation:ent .7s cubic-bezier(.2,.7,.2,1) both}
+.hero .w>div>:nth-child(2){animation-delay:.08s}.hero .w>div>:nth-child(3){animation-delay:.16s}.hero .w>div>:nth-child(4){animation-delay:.24s}.hero .w>div>:nth-child(5){animation-delay:.32s}.hero .afin{animation-delay:.3s}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hero .w>div>*,.hero .afin{animation:none}.c,.b{transition:none}.c:hover{transform:none}}
 </style></head><body>
 <a class="salto" href="#contenido">Saltar al contenido</a>
 <nav class="top" aria-label="Principal"><div class="w"><strong>A&amp;A DEVS</strong>
 <a href="#apps">Apps</a><a href="#planes">Planes</a><a href="#prueba">Prueba cerrada</a><a href="privacidad.html">Privacidad</a></div></nav>
-<header class="hero"><div class="w">
+<header class="hero"><div class="w"><div>
 <p class="lcd">Prueba cerrada abierta</p>
-<h1>Herramientas para guitarristas</h1>
+<h1>Apps para guitarristas: afinador, pedalera y looper</h1>
 <p class="m">A&amp;A DEVS · La Paz, Baja California Sur, México</p>
 <p class="lead">Afina, arma tu cadena de efectos, graba y separa canciones en instrumentos. Todo pensado para tocar en vivo con baja latencia. Gratis para empezar, con un plan Pro opcional.</p>
-<p><a class="b" href="#prueba">Quiero probar la app</a></p>
+<p><a class="b" href="#prueba">Pedir acceso a la prueba</a></p>
+</div>
+<div class="afin" aria-hidden="true"><p class="nm">E</p><p class="hz">82.4 Hz · 6.ª cuerda</p>
+<div class="esc"><i></i><i></i><i></i><i></i><i></i><i class="c0"></i><i></i><i></i><i></i><i></i><i></i></div>
+<div class="cuerdas"><span>E</span><span>A</span><span>D</span><span>G</span><span>B</span><span>e</span></div></div>
 </div></header>
 <main id="contenido" class="w">
 <section id="apps"><h2>THE MUSIC APP</h2>
