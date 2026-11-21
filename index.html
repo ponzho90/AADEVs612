@@ -1,111 +1,273 @@
 <!doctype html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>A&amp;A DEVS · THE MUSIC APP y Deconstruct</title>
 <meta name="description" content="Apps para guitarristas: THE MUSIC APP (afinador, pedalera, looper y más) y Deconstruct (separa canciones en instrumentos, sin conexión). Gratis con plan Pro opcional. Prueba cerrada abierta.">
 <meta name="theme-color" content="#171009">
+<meta property="og:type" content="website"><meta property="og:locale" content="es_MX"><meta property="og:site_name" content="A&amp;A DEVS"><meta property="og:title" content="A&amp;A DEVS · THE MUSIC APP y Deconstruct"><meta property="og:description" content="Apps para guitarristas: THE MUSIC APP (afinador, pedalera, looper y más) y Deconstruct (separa canciones en instrumentos, sin conexión). Gratis con plan Pro opcional. Prueba cerrada abierta."><meta property="og:image" content="https://aadevs612.com/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="A&amp;A DEVS: THE MUSIC APP y Deconstruct, apps para guitarristas"><meta name="twitter:card" content="summary_large_image">
 <style>
 :root{color-scheme:dark;
 --fondo:#171009;--madera:#3c2a1b;--tarjeta:#1f160d;--sup:#2a2016;--hundido:#0d0903;--borde:#5b4733;--bsuave:#3b2f1c;
---texto:#f3e9d6;--texto2:#b9a98f;--ac:#ffb42a;--acc:#ffd98a;--aco:#e69a2e;--sobre:#2a2218;--ok:#4cff8a;
---f:system-ui,Roboto,"Segoe UI",sans-serif;--mono:ui-monospace,"Roboto Mono","Droid Sans Mono",Menlo,Consolas,monospace}
+--texto:#f3e9d6;--texto2:#b9a98f;--ac:#ffb42a;--acc:#ffd98a;--aco:#e69a2e;--sobre:#2a2218;--ok:#4cff8a;--rojo:#ff4a3a;
+--f:system-ui,Roboto,"Segoe UI",sans-serif;--ft:'Arial Black','Arial Bold',Impact,system-ui,sans-serif;--ch:'Trebuchet MS',system-ui,sans-serif;
+--mono:ui-monospace,"Roboto Mono","Droid Sans Mono",Menlo,Consolas,monospace}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+a,button,.b{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;color:var(--texto);font:16px/1.55 var(--f);
-background:var(--fondo) repeating-linear-gradient(90deg,rgba(60,42,27,.35) 0 118px,rgba(0,0,0,.18) 118px 120px)}
-.w{max-width:960px;margin:0 auto;padding:0 16px}
-a{color:var(--ac)}
-a:focus-visible,.b:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+background:var(--fondo) repeating-linear-gradient(90deg,rgba(75,47,26,.55) 0 118px,rgba(0,0,0,.3) 118px 120px)}
+h1,h2,h3{text-wrap:balance;overflow-wrap:anywhere}p,li{text-wrap:pretty;overflow-wrap:break-word}
+.w{max-width:1040px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left)) 0 max(16px,env(safe-area-inset-right))}
+a{color:var(--ac);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,.b:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
 .salto{position:absolute;left:-999px;top:8px;background:var(--ac);color:var(--sobre);padding:12px;min-height:44px;border-radius:6px;font-weight:700}
 .salto:focus{left:8px;z-index:9}
-nav.top{background:rgba(13,9,3,.92);border-bottom:1px solid var(--borde);position:sticky;top:0;z-index:5}
-nav.top .w{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center;padding-top:8px;padding-bottom:8px}
-nav.top strong{font-weight:900;letter-spacing:.06em;margin-right:auto}
+nav.top{background:rgba(13,9,3,.94);border-bottom:2px solid #000;box-shadow:0 2px 0 var(--borde);position:sticky;top:0;z-index:5}
+nav.top .w{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;padding-top:6px;padding-bottom:6px}
+nav.top strong{font:900 15px var(--ft);letter-spacing:.06em;margin-right:auto}
 nav.top a{color:var(--texto);text-decoration:none;padding:0 4px;font-size:14px;display:inline-flex;align-items:center;min-height:44px}
-nav.top a:hover{color:var(--ac);text-decoration:underline}
-header.hero{padding:48px 0 36px}
-.lcd{display:inline-block;font:700 13px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ac);
-background:linear-gradient(var(--hundido),#221807);border:1px solid var(--borde);border-radius:6px;padding:6px 10px;margin:0 0 16px}
-h1{font:900 clamp(2rem,8vw,3.6rem)/1.05 var(--f);margin:0 0 14px;letter-spacing:-.01em}
-h2{font:900 clamp(1.4rem,5vw,1.9rem)/1.15 var(--f);margin:0 0 8px;color:var(--ac)}
-h3{font:800 1.05rem/1.25 var(--f);margin:0 0 6px}
+nav.top a:hover{color:var(--ac)}
+@media (max-width:480px){nav.top .w{gap:0 6px}nav.top strong{font-size:13px}nav.top a{font-size:13px;padding:0 3px}nav.top .nvp{display:none}nav.top a[href="#apps"]{display:none}}
+h1{font:900 clamp(2rem,7.4vw,3.5rem)/1.05 var(--ft);margin:0 0 14px}
+h2{font:900 clamp(1.5rem,5vw,2.2rem)/1.1 var(--ft);margin:0 0 8px;color:var(--ac);text-shadow:0 2px 0 #000}
+h3{font:800 1.05rem/1.25 var(--ch);font-style:italic;margin:0 0 6px}
 p{margin:0 0 12px}.m{color:var(--texto2)}
-.lead{font-size:1.1rem;max-width:40em}
-section{padding:36px 0;border-top:1px solid var(--bsuave)}
-.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px;margin-top:14px}
-.c{background:var(--tarjeta);border:1px solid var(--borde);border-radius:12px;padding:16px;box-shadow:0 3px 0 #0a0a0c}
-.c p{margin:0}
-.pro{border-color:var(--ac)}
+.lead{font-size:1.1rem;max-width:36em}
+section{padding:56px 0 48px;scroll-margin-top:100px}
+.lcd{display:inline-block;font:700 13px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ac);background:linear-gradient(var(--hundido),#221807);border:1px solid var(--borde);border-radius:6px;padding:6px 10px;margin:0 0 16px;box-shadow:inset 0 2px 6px #000}
+.b{display:inline-flex;align-items:center;justify-content:center;padding:12px 22px;border-radius:12px;background:linear-gradient(var(--acc),var(--aco));color:var(--sobre);font:800 16px var(--f);text-decoration:none;min-height:48px;border:0;cursor:pointer;box-shadow:0 5px 0 #7a4a0c,0 10px 18px rgba(0,0,0,.45);transition:transform .1s,box-shadow .1s,filter .15s}
+.b:active{transform:translateY(4px);box-shadow:0 1px 0 #7a4a0c,0 3px 6px rgba(0,0,0,.45)}
+/* ---------- pedales y perillas ---------- */
+.led{display:inline-block;width:14px;height:14px;border-radius:50%;background:#3b0f0d;box-shadow:inset 0 1px 2px #000,0 0 0 2px #0006;transition:background .15s,box-shadow .15s}
+.led.v{background:#12351d}.led.a{background:#3d2a08}
+.on .led,.led.on{background:var(--rojo);box-shadow:0 0 10px 3px rgba(255,74,58,.75)}
+.on .led.v,.led.v.on{background:var(--ok);box-shadow:0 0 10px 3px rgba(76,255,138,.7)}
+.led.a.on,.on .led.a{background:var(--ac);box-shadow:0 0 10px 3px rgba(255,180,42,.75)}
+.knob{display:block;position:relative;width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#7a7a82,#1b1b1f 68%);box-shadow:0 4px 6px rgba(0,0,0,.6),inset 0 1px 1px rgba(255,255,255,.35),0 0 0 3px rgba(0,0,0,.35);transform:rotate(var(--r,0deg))}
+.knob::after{content:"";position:absolute;left:50%;top:5px;width:4px;height:15px;margin-left:-2px;border-radius:2px;background:var(--acc)}
+.sway{animation:sway var(--d,5s) ease-in-out infinite alternate}
+@keyframes sway{from{transform:rotate(calc(var(--r,0deg) - 38deg))}to{transform:rotate(calc(var(--r,0deg) + 38deg))}}
+.ped-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:26px 22px;margin-top:26px}
+.ped{position:relative;border-radius:16px;padding:18px 16px 16px;background:linear-gradient(160deg,var(--p1),var(--p2));border:2px solid rgba(0,0,0,.5);box-shadow:inset 0 2px 0 rgba(255,255,255,.28),0 7px 0 rgba(0,0,0,.55),0 16px 26px rgba(0,0,0,.45);color:var(--pt,#2a2218);transition:transform .2s}
+.ped::before,.ped::after{content:"";position:absolute;top:9px;width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ddd,#555);box-shadow:0 1px 1px #000}
+.ped::before{left:10px}.ped::after{right:10px}
+@media (hover:hover) and (pointer:fine){.ped:hover{transform:translateY(-3px)}}
+.ped .top{display:flex;justify-content:space-between;align-items:center;margin:6px 4px 12px}
+.ped .top b{font:900 12px var(--mono);letter-spacing:.14em;text-transform:uppercase}
+.ped .knobs{display:flex;justify-content:space-around;margin-bottom:14px}
+.plate{background:linear-gradient(var(--hundido),#221807);color:var(--texto);border-radius:8px;padding:10px 12px;box-shadow:inset 0 2px 6px #000;min-height:5.6em}
+.plate h3{color:var(--ac);font-style:normal;font-family:var(--ft);font-size:1rem;margin:0 0 2px}
+.plate p{margin:0;font-size:.92rem;color:var(--texto2)}
+.stomp{display:block;width:100%;min-height:64px;margin-top:14px;border:0;border-radius:12px;cursor:pointer;background:linear-gradient(#e6e9ed,#9fa4ab 55%,#bcc0c6);box-shadow:0 6px 0 #4b4f55,0 10px 12px rgba(0,0,0,.5);color:#2a2218;font:800 13px var(--mono);letter-spacing:.1em;text-transform:uppercase;transition:transform .08s,box-shadow .08s}
+.stomp:active,.stomp[aria-pressed=true]{transform:translateY(5px);box-shadow:0 1px 0 #4b4f55,0 3px 5px rgba(0,0,0,.5)}
+.ped .stomp[aria-pressed=true]{background:linear-gradient(#d6d9dd,#8b9096 55%,#a8acb2)}
+/* ---------- hero ---------- */
+header.hero{padding:40px 0 48px;min-height:calc(100svh - 56px);display:flex;align-items:center}
+header.hero>.w{width:100%;display:grid;gap:34px;align-items:center}
+@media (min-width:860px){header.hero>.w{grid-template-columns:1fr 1.05fr}}
+.amp{position:relative;border-radius:14px;background:repeating-linear-gradient(45deg,#1b1b1e 0 3px,#121214 3px 6px);border:3px solid #000;box-shadow:0 0 0 3px #2b2b30,0 22px 40px rgba(0,0,0,.6);padding:16px 16px 14px;margin-top:16px}
+.amp::before{content:"";position:absolute;left:50%;top:-18px;width:90px;height:22px;margin-left:-45px;border-radius:10px 10px 0 0;background:linear-gradient(#5a3d22,#2e1d0e);border:2px solid #000;border-bottom:0}
+.amp .tag{position:absolute;left:-6px;top:-14px;background:#0d0903;color:var(--ac);font:900 12px var(--mono);padding:3px 10px;border-radius:12px;border:2px solid var(--ac)}
+.amp .front{border-radius:6px;padding:10px 10px 12px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.1) 0 1px,transparent 1px 3px),linear-gradient(#e7d49b,#b8965a);color:#2a2218;box-shadow:inset 0 2px 6px rgba(0,0,0,.5)}
+.amp .nm{display:flex;justify-content:space-between;align-items:center;font:italic 700 1.05rem Georgia,serif;margin-bottom:8px}
+.amp .nm small{display:block;font:700 10px var(--mono);letter-spacing:.2em}
+.amp .knobs{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;text-align:center}
+.amp .knobs span{display:flex;flex-direction:column;align-items:center;gap:6px;font:700 9.5px var(--mono);letter-spacing:.04em}
+.amp .knob{width:clamp(30px,7vw,42px);height:clamp(30px,7vw,42px)}
+.amp .knob::after{top:4px;height:35%}
+.amp .vu{display:flex;gap:3px;align-items:flex-end;height:30px;margin-top:12px;padding:6px 8px;background:#06130b;border-radius:5px;box-shadow:inset 0 2px 5px #000}
+.amp .vu i{flex:1;height:100%;border-radius:1px;background:linear-gradient(#ee4b3a 0 20%,#f4d03f 20% 45%,#33d17a 45%);transform-origin:bottom;transform:scaleY(var(--h,.5))}
+.vu i{animation:vu var(--d,1.1s) ease-in-out infinite alternate}
+@keyframes vu{from{transform:scaleY(calc(var(--h,.5)*.35))}to{transform:scaleY(var(--h,.5))}}
+.amp .grille{height:44px;margin-top:12px;border-radius:4px;background:repeating-linear-gradient(0deg,#3a3326 0 2px,#17130c 2px 5px),#17130c;box-shadow:inset 0 3px 8px #000}
+.cab{display:flex;justify-content:space-between;font:700 10px var(--mono);letter-spacing:.2em;color:#9b8f78;margin-top:8px}
+/* ---------- tablones por escenario ---------- */
+.esc{position:relative}
+.esc.madera{background:repeating-linear-gradient(0deg,rgba(75,47,26,.5) 0 56px,rgba(0,0,0,.35) 56px 58px),linear-gradient(#4b2f1a,#2a190e)}
+.esc.azul{background:radial-gradient(rgba(255,255,255,.06) 1.2px,transparent 1.6px) 0 0/14px 14px,linear-gradient(#110f35,#09081d);--ac:#ffd23f}
+.esc.verde{background:linear-gradient(#1c120b,#0c0e13)}
+.esc.rack{background:linear-gradient(#202026,#101014)}
+.esc{border-top:3px solid #000;box-shadow:inset 0 3px 0 var(--borde)}
+.esc.azul h2{color:#ffd23f}
+/* ---------- Deconstruct ---------- */
+.mix{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-top:22px;padding:14px 10px;border-radius:16px;background:linear-gradient(#2b2a6b,#14122f);border:2px solid #3b3791;box-shadow:0 8px 0 #07061a,0 18px 30px rgba(0,0,0,.5)}
+.mix .ch{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0}
+.mix .vu{display:flex;align-items:flex-end;gap:2px;height:96px;width:100%;max-width:34px;padding:3px;background:#0a0920;border-radius:5px;box-shadow:inset 0 2px 5px #000}
+.mix .vu i{flex:1;height:100%;transform-origin:bottom;border-radius:1px;background:linear-gradient(#ff3d81 0 18%,#ffd23f 18% 45%,#33d17a 45%)}
+.mix .mute[aria-pressed=true]~.vu i,.mix .ch.off .vu i{animation:none;transform:scaleY(.04)}
+.mix .fad{position:relative;width:8px;height:84px;border-radius:4px;background:#05041a;box-shadow:inset 0 1px 3px #000}
+.mix .fad i{position:absolute;left:50%;margin-left:-14px;width:28px;height:18px;border-radius:4px;background:linear-gradient(#e6e9ed,#8b9096);box-shadow:0 3px 4px #000;bottom:calc(var(--v)*1% - 9px)}
+.mix .mute{min-width:44px;min-height:44px;border:0;border-radius:10px;font:800 11px var(--mono);color:#fff;cursor:pointer;background:linear-gradient(#35336a,#14122f);box-shadow:0 4px 0 #05041a;transition:transform .08s,box-shadow .08s}
+.mix .mute:active{transform:translateY(3px);box-shadow:0 1px 0 #05041a}
+.mix .mute[aria-pressed=true]{background:linear-gradient(#ff6b9d,#d4205e);color:#fff}
+.mix .nom{font:700 11px var(--mono);color:#cfcdfa;overflow-wrap:anywhere;text-align:center}
+.marq{overflow:hidden;white-space:nowrap;margin-top:22px;background:linear-gradient(#06130b,#0a1d10);border:2px solid #1f3a29;border-radius:8px;padding:8px 0;color:#7dff8a;font:700 14px var(--mono);letter-spacing:.12em;box-shadow:inset 0 2px 8px #000}
+.marq span{display:inline-block;padding-left:100%;animation:corre 22s linear infinite}
+@keyframes corre{to{transform:translateX(-100%)}}
+@media (max-width:520px){.mix{gap:4px;padding:12px 6px}.mix .nom{font-size:10px}}
+/* ---------- escalas ---------- */
+.lcdv{margin-top:20px;background:linear-gradient(#06130b,#0b2214);border:2px solid #1f3a29;border-radius:12px;padding:14px;box-shadow:inset 0 2px 10px #000,0 8px 0 #05100a}
+.lcdv svg{display:block;width:100%;height:auto}
+.lcdv .t{font:700 13px var(--mono);color:#7dff8a;letter-spacing:.1em;margin:0 0 8px}
+.lcdv .t b{color:#fff}
+.dot{animation:lat 2.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes lat{50%{transform:scale(1.18)}}
+/* ---------- planes ---------- */
+.prices{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:20px;margin-top:22px}
+.pl{position:relative;border-radius:14px;padding:16px;background:linear-gradient(#3b3b43,#202026);border:2px solid #000;box-shadow:inset 0 2px 0 rgba(255,255,255,.18),0 7px 0 #0a0a0c,0 16px 24px rgba(0,0,0,.45);transition:transform .2s}
+@media (hover:hover) and (pointer:fine){.pl:hover{transform:translateY(-3px)}}
+.pl .lcdp{background:linear-gradient(#0d0903,#221807);border-radius:8px;padding:10px 12px;box-shadow:inset 0 2px 6px #000;margin:10px 0}
+.pl .lcdp b{display:block;font:700 2rem/1.1 var(--mono);color:var(--acc);font-variant-numeric:tabular-nums}
+.pl .lcdp small{font:700 12px var(--mono);color:var(--texto2);letter-spacing:.08em}
+.pl .nm{font:900 13px var(--mono);letter-spacing:.14em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center}
+.pl.top{background:linear-gradient(#ffc766,#ff9a1f);color:var(--sobre);border-color:#000;transform:translateY(-6px)}
+.pl.top .nm{color:var(--sobre)}
+.pl.top::after{content:"MÁS CONVENIENTE";position:absolute;right:10px;top:-14px;background:#0d0903;color:var(--ac);font:900 11px var(--mono);padding:4px 9px;border-radius:12px;border:2px solid var(--ac);letter-spacing:.08em}
+@media (hover:hover) and (pointer:fine){.pl.top:hover{transform:translateY(-9px)}}
+.pl p{margin:0;font-size:.92rem}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px;margin-top:28px}
+.c{background:var(--tarjeta);border:2px solid var(--borde);border-radius:14px;padding:16px;box-shadow:0 5px 0 #000}
+.c.pro{border-color:var(--ac)}
 .etq{display:inline-block;font:700 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;background:var(--ac);color:var(--sobre);border-radius:4px;padding:2px 8px;margin-bottom:8px}
-.sub{font:700 .9rem var(--f);margin:0 0 6px;color:var(--texto2)}
-.precio{font:700 15px var(--mono);color:var(--acc);margin:0 0 10px}
 ul.ok{list-style:none;margin:0 0 12px;padding:0}
 ul.ok li{padding:4px 0 4px 26px;position:relative}
-ul.ok li::before{content:"\2713";position:absolute;left:0;color:var(--ok);font-weight:900}
-ol.pasos{margin:0 0 14px;padding-left:22px}ol.pasos li{margin-bottom:8px}
-.b{display:inline-block;padding:12px 20px;border-radius:10px;background:linear-gradient(var(--acc),var(--aco));color:var(--sobre);font:800 16px var(--f);text-decoration:none;min-height:44px}
-.b:hover{filter:brightness(1.08)}
-.nota{background:var(--sup);border:1px solid var(--borde);border-radius:10px;padding:12px 14px}
-footer{padding:28px 0 48px;color:var(--texto2);font-size:14px;border-top:1px solid var(--bsuave)}
+ul.ok li::before{content:"";position:absolute;left:2px;top:11px;width:11px;height:11px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px 2px rgba(76,255,138,.55)}
+.precio{font:700 15px var(--mono);color:var(--acc);margin:0 0 6px}
+/* ---------- prueba cerrada: amplificador ---------- */
+.stand{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:18px 0}
+.pw{min-height:56px;padding:10px 22px;border:0;border-radius:12px;cursor:pointer;font:900 14px var(--mono);letter-spacing:.12em;color:#2a2218;background:linear-gradient(#e6e9ed,#9fa4ab);box-shadow:0 6px 0 #4b4f55,0 10px 14px rgba(0,0,0,.5);display:inline-flex;align-items:center;gap:10px;transition:transform .08s,box-shadow .08s}
+.pw[aria-pressed=true]{transform:translateY(5px);box-shadow:0 1px 0 #4b4f55}
+.glow{transition:box-shadow .4s,filter .4s;filter:saturate(.55) brightness(.8)}
+.glow.enc{filter:none;box-shadow:0 0 0 3px #2b2b30,0 0 50px 8px rgba(255,150,30,.45),0 22px 40px rgba(0,0,0,.6)}
+.glow .vu i{animation-play-state:paused;transform:scaleY(.06)}
+.glow.enc .vu i{animation-play-state:running}
+ol.pasos{margin:14px 0;padding-left:22px}ol.pasos li{margin-bottom:8px}
+.nota{background:rgba(0,0,0,.5);border:1px solid var(--borde);border-radius:10px;padding:12px 14px}
+.nota a{display:inline-block;padding:12px 0;overflow-wrap:anywhere}
+/* ---------- cable ---------- */
+.cable{display:block;width:100%;height:36px;margin:0;background:#0006}
+.cable path{fill:none;stroke:#111;stroke-width:7;stroke-linecap:round}
+.cable circle{fill:var(--ac);animation:pulso 3.2s linear infinite}
+@keyframes pulso{from{transform:translateX(0)}to{transform:translateX(900px)}}
+footer{padding:28px 0 48px;color:var(--texto2);font-size:14px;border-top:3px solid #000;background:#0d0903}
 footer .w{display:flex;flex-wrap:wrap;gap:0 18px;align-items:center}
 footer a{display:inline-flex;align-items:center;min-height:44px;overflow-wrap:anywhere}
 footer span{flex-basis:100%}
-.nota a{display:inline-block;padding:12px 0;overflow-wrap:anywhere}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* ---------- entrada del hero ---------- */
+@keyframes ent{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hero .w>div>*,.hero .amp{animation:ent .7s cubic-bezier(.2,.7,.2,1) both}
+.hero .w>div>:nth-child(2){animation-delay:.08s}.hero .w>div>:nth-child(3){animation-delay:.16s}.hero .w>div>:nth-child(4){animation-delay:.24s}.hero .w>div>:nth-child(5){animation-delay:.32s}.hero .amp{animation-delay:.25s}
+@media (hover:hover) and (pointer:fine){.b:hover{filter:brightness(1.08)}.stomp:hover,.pw:hover{filter:brightness(1.07)}}
+@media (prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+*,*::before,*::after{animation:none!important;transition:none!important}
+.marq{white-space:normal}.marq span{padding-left:12px;display:block}.cable circle{display:none}
+.knob.sway{transform:rotate(var(--r,0deg))}}
+@media (prefers-contrast:more){:root{--borde:#8a7357;--texto2:#d6c8ad}}
 </style></head><body>
 <a class="salto" href="#contenido">Saltar al contenido</a>
 <nav class="top" aria-label="Principal"><div class="w"><strong>A&amp;A DEVS</strong>
-<a href="#apps">Apps</a><a href="#planes">Planes</a><a href="#prueba">Prueba cerrada</a><a href="privacidad.html">Privacidad</a></div></nav>
-<header class="hero"><div class="w">
+<a href="#apps">Apps</a><a href="#deconstruct">Deconstruct</a><a href="#planes">Planes</a><a href="#prueba">Prueba cerrada</a><a class="nvp" href="privacidad.html">Privacidad</a></div></nav>
+
+<header class="hero esc madera"><div class="w"><div>
 <p class="lcd">Prueba cerrada abierta</p>
-<h1>Herramientas para guitarristas</h1>
+<h1>Apps para guitarristas: afinador, pedalera y looper</h1>
 <p class="m">A&amp;A DEVS · La Paz, Baja California Sur, México</p>
 <p class="lead">Afina, arma tu cadena de efectos, graba y separa canciones en instrumentos. Todo pensado para tocar en vivo con baja latencia. Gratis para empezar, con un plan Pro opcional.</p>
-<p><a class="b" href="#prueba">Quiero probar la app</a></p>
+<p><a class="b" href="#prueba">Pedir acceso a la prueba</a></p>
+</div>
+<div class="amp" aria-hidden="true"><span class="tag">AMP</span>
+<div class="front"><div class="nm"><span>Cristal limpio<small>AMPLIFICADOR</small></span><i class="led a on"></i></div>
+<div class="knobs"><span><i class="knob sway" style="--r:-30deg;--d:5s"></i>GAIN</span><span><i class="knob sway" style="--r:10deg;--d:6.3s"></i>GRAVES</span><span><i class="knob sway" style="--r:30deg;--d:4.6s"></i>MEDIOS</span><span><i class="knob sway" style="--r:0deg;--d:7s"></i>AGUDOS</span><span><i class="knob sway" style="--r:-10deg;--d:5.5s"></i>PRES.</span><span><i class="knob sway" style="--r:40deg;--d:6s"></i>VOL.</span></div>
+<div class="vu"><i style="--h:.9;--d:.9s"></i><i style="--h:.6;--d:1.3s"></i><i style="--h:.8;--d:1s"></i><i style="--h:.4;--d:1.5s"></i><i style="--h:1;--d:.8s"></i><i style="--h:.7;--d:1.2s"></i><i style="--h:.5;--d:1.4s"></i><i style="--h:.85;--d:1.1s"></i><i style="--h:.55;--d:.95s"></i><i style="--h:.75;--d:1.25s"></i><i style="--h:.35;--d:1.6s"></i><i style="--h:.65;--d:1s"></i></div></div>
+<div class="grille"></div><div class="cab"><span>CAB</span><span>THE MUSIC APP</span></div></div>
 </div></header>
-<main id="contenido" class="w">
-<section id="apps"><h2>THE MUSIC APP</h2>
-<p>App Android con seis módulos para el guitarrista. Funciona con el micrófono del teléfono o con una interfaz de audio.</p>
-<div class="g">
-<div class="c"><h3>Calibratuner</h3><p class="m">Afinador y calibración de tu guitarra.</p></div>
-<div class="c"><h3>Chain</h3><p class="m">Cadena de pedales y amplificadores con baja latencia.</p></div>
-<div class="c"><h3>DAWPER</h3><p class="m">Graba por canales y arma tus ideas.</p></div>
-<div class="c"><h3>TunTunPss</h3><p class="m">Crea beats y mándalos a DAWPER.</p></div>
-<div class="c"><h3>FSesh</h3><p class="m">Escalas y grados sobre el mástil.</p></div>
-<div class="c"><h3>Diary</h3><p class="m">Bitácora de tus sesiones de práctica.</p></div></div>
-<p class="m" style="margin-top:14px">Por ahora la app solo se consigue en la prueba cerrada. Todavía no hay descarga pública.</p></section>
 
-<section><h2>Deconstruct</h2>
-<p>Separa una canción en voz, batería, bajo, guitarra, piano y otros. Se procesa en tu teléfono, sin conexión a internet y sin subir tus archivos.</p>
-<p class="m">Disponible primero en la prueba cerrada.</p></section>
+<svg class="cable" viewBox="0 0 900 36" preserveAspectRatio="none" aria-hidden="true"><path d="M0 18 C150 4 300 34 450 18 S750 4 900 18"/><circle cx="0" cy="18" r="5"/></svg>
 
-<section><h2>Enciclopedia de escalas para guitarra</h2>
-<p>Libro en español con diagramas de 31 escalas en las 12 raíces. Formato PDF. Estará incluido en el plan Pro.</p>
-<p class="m">Próximamente.</p></section>
+<main id="contenido">
+<section id="apps" class="esc madera"><div class="w"><h2>THE MUSIC APP</h2>
+<p class="lead">App Android con seis módulos, cada uno como un pedal. Funciona con el micrófono del teléfono o con una interfaz de audio. Toca un pisador para encender su luz.</p>
+<div class="ped-g">
+<div class="ped" style="--p1:#f1c24b;--p2:#c88f14"><div class="top"><b>Afinador</b><i class="led"></i></div><div class="knobs"><i class="knob" style="--r:-20deg"></i><i class="knob" style="--r:25deg"></i></div><div class="plate"><h3>Calibratuner</h3><p>Afinador y calibración de tu guitarra.</p></div><button class="stomp" type="button" aria-pressed="false" aria-label="Encender luz del pedal Calibratuner">Pisar</button></div>
+<div class="ped" style="--p1:#ff9a3d;--p2:#d4560c"><div class="top"><b>Cadena</b><i class="led"></i></div><div class="knobs"><i class="knob" style="--r:-35deg"></i><i class="knob" style="--r:5deg"></i><i class="knob" style="--r:40deg"></i></div><div class="plate"><h3>Chain</h3><p>Cadena de pedales y amplificadores con baja latencia.</p></div><button class="stomp" type="button" aria-pressed="false" aria-label="Encender luz del pedal Chain">Pisar</button></div>
+<div class="ped" style="--p1:#4fc98a;--p2:#1f7a4a"><div class="top"><b>Grabadora</b><i class="led"></i></div><div class="knobs"><i class="knob" style="--r:15deg"></i><i class="knob" style="--r:-30deg"></i></div><div class="plate"><h3>DAWPER</h3><p>Graba por canales y arma tus ideas.</p></div><button class="stomp" type="button" aria-pressed="false" aria-label="Encender luz del pedal DAWPER">Pisar</button></div>
+<div class="ped" style="--p1:#8f76ff;--p2:#4d32c4;--pt:#fff"><div class="top"><b>Ritmos</b><i class="led"></i></div><div class="knobs"><i class="knob" style="--r:30deg"></i><i class="knob" style="--r:-15deg"></i></div><div class="plate"><h3>TunTunPss</h3><p>Crea beats y mándalos a DAWPER.</p></div><button class="stomp" type="button" aria-pressed="false" aria-label="Encender luz del pedal TunTunPss">Pisar</button></div>
+<div class="ped" style="--p1:#ee7a98;--p2:#b02f55"><div class="top"><b>Escalas</b><i class="led"></i></div><div class="knobs"><i class="knob" style="--r:-5deg"></i><i class="knob" style="--r:35deg"></i></div><div class="plate"><h3>FSesh</h3><p>Escalas y grados sobre el mástil.</p></div><button class="stomp" type="button" aria-pressed="false" aria-label="Encender luz del pedal FSesh">Pisar</button></div>
+<div class="ped" style="--p1:#ffd98a;--p2:#e69a2e"><div class="top"><b>Bitácora</b><i class="led"></i></div><div class="knobs"><i class="knob" style="--r:20deg"></i><i class="knob" style="--r:-40deg"></i></div><div class="plate"><h3>Diary</h3><p>Bitácora de tus sesiones de práctica.</p></div><button class="stomp" type="button" aria-pressed="false" aria-label="Encender luz del pedal Diary">Pisar</button></div>
+</div>
+<p class="m" style="margin-top:26px">Por ahora la app solo se consigue en la prueba cerrada. Todavía no hay descarga pública.</p></div></section>
 
-<section id="planes"><h2>Planes</h2>
-<p>Un solo paquete Pro cubre THE MUSIC APP, Deconstruct y el libro. Sin anuncios de banner en los módulos para tocar en vivo.</p>
-<div class="g">
+<section id="deconstruct" class="esc azul"><div class="w"><h2>Deconstruct</h2>
+<p class="lead">Separa una canción en voz, batería, bajo, guitarra, piano y otros. Se procesa en tu teléfono, sin conexión a internet y sin subir tus archivos. Silencia un instrumento y toca encima.</p>
+<div class="marq" aria-hidden="true"><span>SEPARA · VOZ · BATERÍA · BAJO · GUITARRA · PIANO · OTROS · SIN CONEXIÓN · TUS ARCHIVOS NO SE SUBEN ·</span></div>
+<div class="mix" role="group" aria-label="Mezclador de instrumentos separados">
+<div class="ch"><div class="vu"><i style="--h:.9;--d:.8s"></i><i style="--h:.7;--d:1.1s"></i><i style="--h:.8;--d:.9s"></i></div><div class="fad"><i style="--v:82"></i></div><button class="mute" type="button" aria-pressed="false" aria-label="Silenciar voz">M</button><span class="nom">Voz</span></div>
+<div class="ch"><div class="vu"><i style="--h:.7;--d:.6s"></i><i style="--h:.95;--d:.7s"></i><i style="--h:.6;--d:.5s"></i></div><div class="fad"><i style="--v:70"></i></div><button class="mute" type="button" aria-pressed="false" aria-label="Silenciar batería">M</button><span class="nom">Batería</span></div>
+<div class="ch"><div class="vu"><i style="--h:.55;--d:1.4s"></i><i style="--h:.6;--d:1.2s"></i><i style="--h:.5;--d:1.5s"></i></div><div class="fad"><i style="--v:60"></i></div><button class="mute" type="button" aria-pressed="false" aria-label="Silenciar bajo">M</button><span class="nom">Bajo</span></div>
+<div class="ch"><div class="vu"><i style="--h:.8;--d:1s"></i><i style="--h:.5;--d:.85s"></i><i style="--h:.75;--d:1.3s"></i></div><div class="fad"><i style="--v:75"></i></div><button class="mute" type="button" aria-pressed="false" aria-label="Silenciar guitarra">M</button><span class="nom">Guitarra</span></div>
+<div class="ch"><div class="vu"><i style="--h:.4;--d:1.6s"></i><i style="--h:.55;--d:1.1s"></i><i style="--h:.35;--d:1.4s"></i></div><div class="fad"><i style="--v:55"></i></div><button class="mute" type="button" aria-pressed="false" aria-label="Silenciar piano">M</button><span class="nom">Piano</span></div>
+<div class="ch"><div class="vu"><i style="--h:.45;--d:1.2s"></i><i style="--h:.3;--d:1.7s"></i><i style="--h:.5;--d:1s"></i></div><div class="fad"><i style="--v:45"></i></div><button class="mute" type="button" aria-pressed="false" aria-label="Silenciar otros">M</button><span class="nom">Otros</span></div>
+</div>
+<p class="m" style="margin-top:22px">Disponible primero en la prueba cerrada. Compra aparte: $200 MXN de por vida.</p></div></section>
+
+<section id="escalas" class="esc verde"><div class="w"><h2>Enciclopedia de escalas para guitarra</h2>
+<p class="lead">Libro en español con diagramas de 31 escalas en las 12 raíces. Se vende aparte, impreso: $500 MXN.</p>
+<div class="lcdv" role="img" aria-label="Diagrama de la escala pentatónica menor de La en el mástil de la guitarra, cuerdas de la 1 a la 6, trastes 0 a 12">
+<p class="t">PENTATÓNICA MENOR · RAÍZ <b>A</b></p>
+<svg viewBox="0 0 520 140" aria-hidden="true"><g stroke="#2d6a43" stroke-width="2"><line x1="40" y1="10" x2="40" y2="120" stroke="#7dff8a" stroke-width="5"/><line x1="78" y1="10" x2="78" y2="120"/><line x1="116" y1="10" x2="116" y2="120"/><line x1="154" y1="10" x2="154" y2="120"/><line x1="192" y1="10" x2="192" y2="120"/><line x1="230" y1="10" x2="230" y2="120"/><line x1="268" y1="10" x2="268" y2="120"/><line x1="306" y1="10" x2="306" y2="120"/><line x1="344" y1="10" x2="344" y2="120"/><line x1="382" y1="10" x2="382" y2="120"/><line x1="420" y1="10" x2="420" y2="120"/><line x1="458" y1="10" x2="458" y2="120"/><line x1="496" y1="10" x2="496" y2="120"/></g>
+<g stroke="#4f9a6a" stroke-width="1.5"><line x1="40" y1="14" x2="496" y2="14"/><line x1="40" y1="36" x2="496" y2="36"/><line x1="40" y1="58" x2="496" y2="58"/><line x1="40" y1="80" x2="496" y2="80"/><line x1="40" y1="102" x2="496" y2="102"/><line x1="40" y1="124" x2="496" y2="124" stroke-width="2.5"/></g>
+<g fill="#7dff8a"><circle class="dot" cx="24" cy="14" r="8"/><circle class="dot" cx="173" cy="14" r="8" style="animation-delay:.3s"/><circle class="dot" cx="325" cy="14" r="8" style="animation-delay:.6s"/><circle class="dot" cx="439" cy="14" r="8" style="animation-delay:.9s"/>
+<circle cx="135" cy="36" r="8"/><circle cx="249" cy="36" r="8"/><circle cx="363" cy="36" r="8"/><circle cx="439" cy="36" r="8"/><circle cx="477" cy="36" r="8"/>
+<circle cx="97" cy="58" r="8"/><circle cx="211" cy="58" r="8"/><circle cx="325" cy="58" r="8"/><circle cx="458" cy="58" r="8"/>
+<circle cx="59" cy="80" r="8"/><circle cx="211" cy="80" r="8"/><circle cx="287" cy="80" r="8"/><circle cx="401" cy="80" r="8"/><circle cx="477" cy="80" r="8"/>
+<circle cx="24" cy="102" r="8"/><circle cx="135" cy="102" r="8"/><circle cx="211" cy="102" r="8"/><circle cx="325" cy="102" r="8"/><circle cx="439" cy="102" r="8"/></g>
+<g fill="#fff"><circle class="dot" cx="230" cy="14" r="9" style="animation-delay:.5s"/></g></svg></div>
+<p class="m" style="margin-top:22px">Próximamente.</p></div></section>
+
+<section id="planes" class="esc rack"><div class="w"><h2>Planes</h2>
+<p class="lead">El plan Pro es para THE MUSIC APP. Deconstruct y el libro impreso se compran aparte. Sin anuncios de banner en los módulos para tocar en vivo. Precios en pesos mexicanos (MXN).</p>
+<div class="prices">
+<div class="pl"><div class="nm"><span>Pro 1 mes</span><i class="led v on"></i></div><div class="lcdp"><b>$120</b><small>POR MES</small></div></div>
+<div class="pl"><div class="nm"><span>Pro 3 meses</span><i class="led v on"></i></div><div class="lcdp"><b>$320</b><small>≈ $107 AL MES</small></div></div>
+<div class="pl top"><div class="nm"><span>Pro anual</span><i class="led on"></i></div><div class="lcdp"><b>$990</b><small>≈ $82 AL MES</small></div></div>
+<div class="pl"><div class="nm"><span>Pro de por vida</span><i class="led v on"></i></div><div class="lcdp"><b>$2,490</b><small>UN SOLO PAGO</small></div></div></div>
+<div class="cols">
 <div class="c" role="group" aria-label="Plan Gratis"><span class="etq">Gratis</span><h3>Para empezar</h3>
 <ul class="ok"><li>Calibratuner (afinador), Diary y FSesh con las 5 escalas de siempre</li><li>Chain: 1 pedal de cada tipo y 5 tonos, sin modelos NAM</li><li>TunTunPss: 5 beats pregrabados de hasta 30 s</li><li>DAWPER: 2 canales, loops de hasta 30 s</li></ul>
 <p class="precio">Sin costo</p></div>
 <div class="c pro" role="group" aria-label="Plan Pro"><span class="etq">Pro</span><h3>Todo sin tope</h3>
-<ul class="ok"><li>Chain completo con modelos NAM</li><li>DAWPER y TunTunPss sin límites, con exportación</li><li>Diary que graba por ti</li><li>El libro de escalas completo</li></ul>
-<h4 class="sub">Cómo se paga</h4>
-<ul class="ok"><li>Mensual</li><li>Anual (el más conveniente)</li><li>De por vida: un solo pago, para quien prefiere no suscribirse</li></ul>
-<p class="precio">Precios por anunciar</p>
-<p class="m">Prueba Pro gratis por 14 días la primera vez que toques algo de Pro. Si vence, lo que guardaste se conserva en solo lectura.</p></div></div>
-<p class="m" style="margin-top:14px">Los precios todavía no están definidos y por ahora no se cobra nada. Lo que incluye cada plan puede ajustarse antes del lanzamiento.</p></section>
+<ul class="ok"><li>Chain completo con modelos NAM</li><li>DAWPER y TunTunPss sin límites, con exportación</li><li>Diary que graba por ti</li><li>Todos los presets y exportación sin tope</li></ul>
+<p class="m" style="margin:0">Prueba Pro gratis por 14 días la primera vez que toques algo de Pro. Si vence, lo que guardaste se conserva en solo lectura.</p></div>
+<div class="c" role="group" aria-label="Deconstruct y libro"><span class="etq">Aparte</span><h3>Deconstruct y libro impreso</h3>
+<ul class="ok"><li>Deconstruct: $200 de por vida, un solo pago</li><li>Libro impreso de escalas: $500</li></ul>
+<p class="m" style="margin:0">Prueba cerrada: $0.</p></div></div>
+<p class="m" style="margin-top:22px">Precios finales los confirma Play Console y pueden cambiar. Por ahora no se cobra nada. Lo que incluye cada plan puede ajustarse antes del lanzamiento.</p></div></section>
 
-<section id="prueba"><h2>Prueba cerrada: pide tu acceso</h2>
-<p>Buscamos guitarristas que quieran probar la app y decirnos qué mejorar. Para darte acceso en Google Play necesitamos el correo de tu cuenta de Google Play.</p>
+<section id="prueba" class="esc madera"><div class="w"><h2>Prueba cerrada: pide tu acceso</h2>
+<p class="lead">Buscamos guitarristas que quieran probar la app y decirnos qué mejorar. Participar cuesta $0 y tendrás Pro gratis durante la prueba. Para darte acceso en Google Play necesitamos el correo de tu cuenta de Google Play.</p>
+<div class="stand"><button class="pw" type="button" id="pw" aria-pressed="false"><i class="led" style="width:16px;height:16px"></i><span id="pwt">ENCENDER</span></button><span class="m" style="margin:0">Enciende el amplificador.</span></div>
+<div class="amp glow" id="ampP" aria-hidden="true" style="margin-bottom:30px"><span class="tag">AMP</span><div class="front"><div class="nm"><span>Prueba cerrada<small>ACCESO POR CORREO</small></span><i class="led a" id="ledP"></i></div>
+<div class="vu"><i style="--h:.9;--d:.9s"></i><i style="--h:.6;--d:1.3s"></i><i style="--h:.8;--d:1s"></i><i style="--h:.4;--d:1.5s"></i><i style="--h:1;--d:.8s"></i><i style="--h:.7;--d:1.2s"></i><i style="--h:.5;--d:1.4s"></i><i style="--h:.85;--d:1.1s"></i><i style="--h:.55;--d:.95s"></i><i style="--h:.75;--d:1.25s"></i></div></div><div class="grille"></div></div>
 <ol class="pasos">
 <li>Escríbenos desde el correo que usas en Google Play.</li>
 <li>Cuéntanos el modelo de tu teléfono Android y si tocas con micrófono o con interfaz de audio.</li>
 <li>Te agregamos a la lista de probadores y te mandamos el enlace para instalar.</li></ol>
 <div class="nota"><p><strong>Contacto:</strong> escríbenos a <a href="mailto:contacto@aadevs612.com">contacto@aadevs612.com</a> con el correo de tu cuenta de Google Play.</p>
-<p class="m" style="margin:0">Usaremos tu correo solo para darte acceso a la prueba.</p></div></section>
-
-<section id="privacidad"><h2>Privacidad</h2><p>Lee cómo tratamos tus datos en la <a href="privacidad.html">política de privacidad</a>.</p></section>
+<p class="m" style="margin:0">Usaremos tu correo solo para darte acceso a la prueba.</p></div></div></section>
 </main>
 <footer><div class="w"><a href="mailto:contacto@aadevs612.com">contacto@aadevs612.com</a><a href="privacidad.html">Política de privacidad</a><span>© 2026 A&amp;A DEVS · aadevs612.com</span></div></footer>
+<script>
+(function(){
+document.querySelectorAll('.stomp').forEach(function(b){b.addEventListener('click',function(){
+var on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);
+b.closest('.ped').classList.toggle('on',on);b.textContent=on?'Activo':'Pisar'})});
+document.querySelectorAll('.mute').forEach(function(b){b.addEventListener('click',function(){
+var on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);
+b.closest('.ch').classList.toggle('off',on)})});
+var p=document.getElementById('pw');
+if(p)p.addEventListener('click',function(){var on=p.getAttribute('aria-pressed')!=='true';
+p.setAttribute('aria-pressed',on);document.getElementById('ampP').classList.toggle('enc',on);
+document.getElementById('ledP').classList.toggle('on',on);document.getElementById('pwt').textContent=on?'APAGAR':'ENCENDER'});
+})();
+</script>
 </body></html>
