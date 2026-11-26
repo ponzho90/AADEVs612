@@ -143,7 +143,8 @@ ul.ok li::before{content:"";position:absolute;left:2px;top:11px;width:11px;heigh
 .glow .vu i{animation-play-state:paused;transform:scaleY(.06)}
 .glow.enc .vu i{animation-play-state:running}
 ol.pasos{margin:14px 0;padding-left:22px}ol.pasos li{margin-bottom:8px}
-.cta{display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border-radius:10px;background:var(--acc);color:#1a1208;font-weight:700;text-decoration:none}.nota a.cta{padding:0 20px}
+.cta{display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border-radius:10px;background:var(--acc);color:#1a1208;font-weight:700;text-decoration:none}.nota a.cta{padding:0 20px}.nota .acc a.cta{display:flex;align-items:center;justify-content:center;padding:12px 20px;min-height:48px;box-sizing:border-box}.acc button.cta{display:flex;align-items:center;justify-content:center;min-height:48px;box-sizing:border-box}
+.acc{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}.acc .cta{justify-content:center;text-align:center;line-height:1.25;padding:12px 20px;flex:1 1 220px}button.cta{border:0;font:inherit;font-weight:700;cursor:pointer}.cta.sec{background:transparent;color:var(--acc);border:2px solid var(--acc)}.cta:focus-visible{outline:2px solid var(--acc);outline-offset:3px}.mail{user-select:all;overflow-wrap:anywhere}.aviso{font-size:.9rem;opacity:.85}
 .faq{border:1px solid var(--borde);border-radius:10px;padding:0 14px;margin:8px 0;background:rgba(0,0,0,.35)}.faq summary{min-height:48px;display:flex;align-items:center;cursor:pointer;font-weight:600}.faq p{margin:0 0 14px}
 .nota{background:rgba(0,0,0,.5);border:1px solid var(--borde);border-radius:10px;padding:12px 14px}
 .nota a{display:inline-block;padding:12px 0;overflow-wrap:anywhere}
@@ -256,8 +257,12 @@ html{scroll-behavior:auto}
 <li>Escríbenos desde el correo que usas en Google Play.</li>
 <li>Cuéntanos el modelo de tu teléfono Android y si tocas con micrófono o con interfaz de audio.</li>
 <li>Te agregamos a la lista de probadores y te mandamos el enlace para instalar.</li></ol>
-<div class="nota"><p><strong>Contacto:</strong> escríbenos a <a href="mailto:contacto@aadevs612.com">contacto@aadevs612.com</a> con el correo de tu cuenta de Google Play.</p>
-<p><a class="cta" href="mailto:contacto@aadevs612.com?subject=Quiero%20entrar%20a%20la%20prueba%20cerrada&amp;body=Correo%20de%20mi%20cuenta%20de%20Google%20Play%3A%0AModelo%20de%20mi%20tel%C3%A9fono%20Android%3A%0AToco%20con%3A%20micr%C3%B3fono%20%2F%20interfaz%20de%20audio">Escribir con el correo ya armado</a></p>
+<div class="nota"><p><strong>Contacto:</strong> escríbenos a <b class="mail">contacto@aadevs612.com</b> con el correo de tu cuenta de Google Play.</p>
+<div class="acc"><a class="cta" href="mailto:contacto@aadevs612.com?subject=Quiero%20entrar%20a%20la%20prueba%20cerrada&amp;body=Correo%20de%20mi%20cuenta%20de%20Google%20Play%3A%0AModelo%20de%20mi%20tel%C3%A9fono%20Android%3A%0AToco%20con%3A%20micr%C3%B3fono%20%2F%20interfaz%20de%20audio">Abrir mi correo con el mensaje</a>
+<a class="cta sec" target="_blank" rel="noopener" href="https://mail.google.com/mail/?view=cm&amp;to=contacto%40aadevs612.com&amp;su=Quiero%20entrar%20a%20la%20prueba%20cerrada&amp;body=Correo%20de%20mi%20cuenta%20de%20Google%20Play%3A%0AModelo%20de%20mi%20tel%C3%A9fono%20Android%3A%0AToco%20con%3A%20micr%C3%B3fono%20%2F%20interfaz%20de%20audio">Abrir en Gmail</a>
+<button class="cta sec" type="button" data-copia="contacto@aadevs612.com">Copiar correo</button>
+<button class="cta sec" type="button" data-copia="Correo de mi cuenta de Google Play:&#10;Modelo de mi teléfono Android:&#10;Toco con: micrófono / interfaz de audio">Copiar mensaje</button></div>
+<p class="aviso" id="copiado" role="status">Si el botón no abre tu correo, copia la dirección y el mensaje y pégalos en tu app de correo.</p>
 <p class="m" style="margin:0">Usaremos tu correo solo para darte acceso a la prueba.</p></div>
 <h3 style="margin-top:34px">Preguntas frecuentes</h3>
 <details class="faq"><summary>¿Cuánto cuesta la prueba cerrada?</summary><p>Nada. Quien participa usa Pro gratis durante la prueba.</p></details>
@@ -281,4 +286,5 @@ p.setAttribute('aria-pressed',on);document.getElementById('ampP').classList.togg
 document.getElementById('ledP').classList.toggle('on',on);document.getElementById('pwt').textContent=on?'APAGAR':'ENCENDER'});
 })();
 </script>
+<script>document.addEventListener("click",function(e){var b=e.target.closest("[data-copia]");if(!b)return;var t=b.getAttribute("data-copia").replace(/&#10;/g,"\n"),m=document.getElementById("copiado"),o=b.textContent;function ok(){b.textContent="Copiado";if(m)m.textContent="Copiado. Pégalo en tu app de correo y envíalo a contacto@aadevs612.com.";setTimeout(function(){b.textContent=o},1800)}function sel(){var r=document.createElement("textarea");r.value=t;r.setAttribute("readonly","");r.style.cssText="position:fixed;opacity:0";document.body.appendChild(r);r.select();try{document.execCommand("copy")?ok():0}catch(x){}document.body.removeChild(r)}try{navigator.clipboard.writeText(t).then(ok,sel)}catch(x){sel()}});</script>
 </body></html>
